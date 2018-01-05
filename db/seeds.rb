@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -5,3 +7,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+admin_org = Organization.create!(name: "PatternGap")
+admin = User.create!(email: "jon@lebensold.ca",
+                     password: "abcd1234",
+                     password_confirmation: "abcd1234",
+                     role: :admin,
+                     organization: admin_org)
