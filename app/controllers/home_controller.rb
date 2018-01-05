@@ -1,6 +1,6 @@
-HomeController < ApplicationController
+# frozen_string_literal: true
 
-  def index
-
-  end
+class HomeController < ApplicationController
+  layout "marketing"
+  def index; end
 end

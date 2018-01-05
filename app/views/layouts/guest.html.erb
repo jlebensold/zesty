@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pattern Gap</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+		<%= stylesheet_link_tag 'marketing', media: 'all' %>
+  </head>
+
+  <body>
+    <p class="alert-notice"><%= notice %></p>
+    <p class="alert-alert"><%= alert %></p>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <header class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Cover</h3>
+              <nav class="nav nav-masthead">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+              </nav>
+            </div>
+          </header>
+
+          <main role="main" class="inner cover">
+            <h1 class="cover-heading">Pattern Gap</h1>
+						<%= yield %>
+          </main>
+
+          <footer class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </footer>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </body>
+</html>
+
