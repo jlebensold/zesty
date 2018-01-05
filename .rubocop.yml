@@ -1,0 +1,61 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'lib/tasks/**/*.rake'
+    - 'Gemfile'
+  Exclude:
+    - 'Vagrantfile'
+    - 'bin/rails'
+    - 'bin/yarn'
+    - 'bin/rspec'
+    - 'bin/spring'
+    - 'bin/rake'
+    - 'bin/clockwork'
+    - 'bin/clockworkd'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'vendor/node_modules/**'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+# Metrics
+# Enable these when we want to start heavy refactoring
+Metrics/LineLength:
+  Enabled: true
+  Max: 100
+Metrics/MethodLength:
+  Enabled: true
+Metrics/ModuleLength:
+  Enabled: true
+Metrics/CyclomaticComplexity:
+  Enabled: true
+Metrics/ClassLength:
+  Max: 250
+Metrics/AbcSize:
+  Enabled: true
+Metrics/PerceivedComplexity:
+  Enabled: true
+
+## Style
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/Documentation:
+  Enabled: false
+Style/SignalException:
+  EnforcedStyle: semantic
+
+## Lint
+# This is disabled until after this issue is resolved:
+# https://github.com/bbatsov/rubocop/pull/4237
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+# We allow 05 rather than 0o5
+Style/NumericLiteralPrefix:
+  EnforcedOctalStyle: zero_only
+
+## Rails
+Rails:
+  Enabled: true
