@@ -1,0 +1,36 @@
+<div class="row">
+	<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h2>My Classifiers</h2>
+    <div>
+      <%=  link_to "New Classifier", new_account_classifier_path, { class: "btn btn-primary" } %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Organization</th>
+            <th>Created At</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @classifiers.each do |classifier | %>
+            <tr>
+              <td><%= classifier.id %></td>
+              <td><%= classifier.name %></td>
+              <td><%= classifier.organization.name %></td>
+              <td><%= classifier.created_at %></td>
+              <td>
+								<%= link_to "Details", account_classifier_jobs_path(classifier), class: "btn btn-sm btn-secondary " %>|
+								<%= link_to "Setup", account_classifier_input_assets_path(classifier), class: "btn btn-sm btn-primary" %>|
+								<%= link_to "Delete", account_classifier_path(classifier), method: :delete,
+									data: { confirm: "Are you sure?" } , class: "btn btn-sm btn-danger" %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

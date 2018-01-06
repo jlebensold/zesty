@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label>Organization</label>
+   <%= form.select :organization_id, Organization.all.map { |o| [o.name, o.id ] },
+     {}, { class: 'form-control' }  %>
+</div>
+<div class="form-group">
+  <label>Name</label>
+   <%= form.text_field :name, class: 'form-control'  %>
+</div>
+<div class="form-group">
+  <label for="exampleInputEmail1">Labels</label>
+   <%= form.text_area :labels, rows: 10, class: 'form-control'  %>
+</div>
+<%= form.submit "Submit", class: "btn btn-primary" %>

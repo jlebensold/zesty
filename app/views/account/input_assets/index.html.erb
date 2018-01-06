@@ -1,0 +1,29 @@
+<div class="row">
+  <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+  <h1>Classifier <%= @classifier.name %></h1>
+  <%= form_for @classifier,
+      url: account_classifier_input_assets_path(@classifier),
+      as: :input_assets,
+      method: :post,
+      html: { class: 'form-horizontal', multipart: true } do |f| %>
+    <% @classifier.asset_labels.each do |label| %>
+      <section>
+        <h3><%= label %></h3>
+        <div class="controls">
+          <%= f.file_field "attachments[#{label}]", type: :file, multiple: true %>
+        </div>
+        <ul class="list-group">
+          <% @classifier.input_assets.where(label: label).each do |input_asset| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <%= input_asset.attachment.original_filename %>
+              <%= link_to "Delete", account_classifier_input_asset_path(@classifier, input_asset), method: :delete,
+                data: { confirm: "Are you sure?" } , class: "btn btn-sm btn-danger" %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  <% end %>
+	</main>
+</div>

@@ -9,7 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def meta_assign(name, args)
     meta_will_change!
-    meta[name] = args[0]
+    meta[name] = args.first
   end
 
   def meta_retrieve(name)

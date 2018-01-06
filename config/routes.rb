@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   namespace :account do
     get "/dashboard", to: "dashboard#index"
-    resources :classifiers
+    resources :classifiers do
+      resources :input_assets
+      resources :jobs
+    end
   end
 end

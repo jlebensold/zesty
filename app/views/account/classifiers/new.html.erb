@@ -1,0 +1,9 @@
+<div class="row">
+	<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+		<h1>New Classifier</h1>
+		<%= form_for [@classifier], { as: :classifier, url: account_classifiers_path(@classifier),
+																html: { class: "form_body" } } do |f| %>
+			<%= render partial: 'form', locals: { form: f } %>
+		<% end %>
+	</main>
+</div>
