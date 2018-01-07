@@ -1,0 +1,13 @@
+<center>
+  <%
+    qrcode = RQRCode::QRCode.new(@url)
+    # With default options specified explicitly
+    svg = qrcode.as_svg(offset: 0, color: '000',
+    shape_rendering: 'crispEdges',
+    module_size: 11)
+  %>
+<%= svg.html_safe %>
+<p>
+<%= @url %>
+</p>
+</center>

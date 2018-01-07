@@ -8,7 +8,6 @@ class Account::InputAssetsController < ApplicationController
   end
 
   def create
-
     record_params[:attachments].each do |label|
       record_params[:attachments][label].each do |attachment|
         @classifier.input_assets.create(label: label, attachment: attachment)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Account::InputAssetsController < ApplicationController
+class Account::JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :fetch_classifier
 
@@ -8,7 +8,9 @@ class Account::InputAssetsController < ApplicationController
   end
 
   def create
-    redirect_to account_classifier_path(@classifier), notice: 'Job Started.'
+    job = ClassificationJob.create!(classifier: @classifier, status: :started)
+    ClassifyJob.perform_later job.id
+    redirect_to account_classifier_jobs_path(@classifier), notice: 'Job Started.'
   end
 
 
