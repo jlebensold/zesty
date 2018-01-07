@@ -6,7 +6,7 @@ class AddRoleToUsers < ActiveRecord::Migration[5.1]
 		 CREATE TYPE role AS ENUM ('admin', 'customer');
 	 SQL
     add_column :users, :role, :role, index: true, null: false, default: "customer"
- end
+  end
 
   def down
     remove_column :users, :role

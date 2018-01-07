@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Account::ClassifiersHelper
+module Account
+  module ClassifiersHelper
+  end
 end

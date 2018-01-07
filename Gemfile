@@ -17,7 +17,6 @@ gem "sass-rails", "~> 5.0"
 gem "bootstrap", "~> 4.0.0.beta3"
 gem "jquery-rails"
 
-
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 
@@ -28,9 +27,8 @@ gem "foreman"
 gem "jbuilder", "~> 2.5"
 gem "sidekiq"
 
-gem "paperclip", "~> 5.0.0"
 gem "devise"
-
+gem "paperclip", "~> 5.0.0"
 
 gem "rqrcode"
 
