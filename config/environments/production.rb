@@ -2,6 +2,7 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.secret_key = '498febfd78f955cca7cc17fbfba3a6ced7be92a00265ec061cb1f672e0e018c3548fdd55ccfa6ef74915c412645aef6e182f2b5acf481f93713a7dc400e98b82'
 
   # Code is not reloaded between requests.
   config.cache_classes = true
