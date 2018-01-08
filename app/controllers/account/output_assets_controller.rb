@@ -2,7 +2,6 @@
 
 module Account
   class OutputAssetsController < ApplicationController
-    before_action :authenticate_user!
 
     def show
       @asset = OutputAsset.find(params[:id])
