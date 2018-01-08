@@ -45,6 +45,7 @@ class ClassifyJob < ApplicationJob
       Dir.mkdir(label_path) unless File.exist? label_path
       classifier.input_assets.where(label: label).each do |asset|
         copy_path = File.join(label_path, asset.attachment.original_filename)
+        p "Saving #{copy_path}"
         asset.attachment.copy_to_local_file(:original, copy_path)
       end
     end
