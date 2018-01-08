@@ -17,7 +17,6 @@ class ClassifyJob < ApplicationJob
       run_crumbs(dir)
       classification_job.update_attributes(status: "s2_classifier_created")
       collect_assets(classification_job)
-      classification_job.update_attributes(status: "completed")
     end
   end
 
@@ -26,12 +25,14 @@ class ClassifyJob < ApplicationJob
     tf_model = File.join(path_to_crumbs, "output", "graph.pb")
     if !File.exists?(ml_model) || !File.exists?(tf_model)
       p "Assets don't exist. returning..."
+      job.update_attributes(status: "failed")
       return
     end
     job.output_assets.create!(attachment: File.new(ml_model), label: "mlmodel",
                               classifier: job.classifier)
     job.output_assets.create!(attachment: File.new(tf_model), label: "tensorflow graph",
                               classifier: job.classifier)
+    job.update_attributes(status: "completed")
   end
 
   def run_crumbs(dir)
