@@ -7,8 +7,8 @@ if ENV.fetch("RAILS_ENV") == "production"
   # Min and Max threads per worker
   threads 1, 6
 
-  app_dir = "/srv/www/zesty"
-  shared_dir = "#{app_dir}/shared"
+  app_dir = "/srv/www/zesty/current"
+  shared_dir = "#{app_dir}/../shared"
 
   # Default to production
   rails_env = ENV['RAILS_ENV'] || "production"
