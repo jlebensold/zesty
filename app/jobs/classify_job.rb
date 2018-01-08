@@ -32,6 +32,9 @@ class ClassifyJob < ApplicationJob
                               classifier: job.classifier)
     job.output_assets.create!(attachment: File.new(tf_model), label: "tensorflow graph",
                               classifier: job.classifier)
+    File.unlink(ml_model)
+    File.unlink(tf_model)
+
     job.update_attributes(status: "completed")
   end
 
