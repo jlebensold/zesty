@@ -23,15 +23,19 @@ class ClassifyJob < ApplicationJob
 
   def collect_assets(job)
     ml_model = File.join(path_to_crumbs, "output", "graph.mlmodel")
+    tf_model = File.join(path_to_crumbs, "output", "graph.pb")
+    if !File.exists?(ml_model) || !File.exists?(tf_model)
+      p "Assets don't exist. returning..."
+      return
+    end
     job.output_assets.create!(attachment: File.new(ml_model), label: "mlmodel",
                               classifier: job.classifier)
-    tf_model = File.join(path_to_crumbs, "output", "graph.pb")
     job.output_assets.create!(attachment: File.new(tf_model), label: "tensorflow graph",
                               classifier: job.classifier)
   end
 
   def run_crumbs(dir)
-    # p "Running crumbs on #{dir}"
+    p "Running crumbs (#{path_to_crumbs}) -  #{dir}"
     system(File.join(path_to_crumbs, "run.sh"), path_to_crumbs, dir)
   end
 
