@@ -8,7 +8,7 @@ class ClassifyJob < ApplicationJob
   end
 
   def perform(classification_job_id)
-    # p "Starting Job ##{classification_job_id}"
+    logger.info "Starting Job ##{classification_job_id}"
     classification_job = ClassificationJob.find(classification_job_id)
     classification_job.update_attributes(status: "started")
     Dir.mktmpdir do |dir|
@@ -24,7 +24,7 @@ class ClassifyJob < ApplicationJob
     ml_model = File.join(path_to_crumbs, "output", "graph.mlmodel")
     tf_model = File.join(path_to_crumbs, "output", "graph.pb")
     if !File.exists?(ml_model) || !File.exists?(tf_model)
-      p "Assets don't exist. returning..."
+      logger.info "Assets don't exist. returning..."
       job.update_attributes(status: "failed")
       return
     end
@@ -36,7 +36,7 @@ class ClassifyJob < ApplicationJob
   end
 
   def run_crumbs(dir)
-    p "Running crumbs (#{path_to_crumbs}) -  #{dir}"
+    logger.info "Running crumbs (#{path_to_crumbs}) -  #{dir}"
     system(File.join(path_to_crumbs, "run.sh"), path_to_crumbs, dir)
   end
 
@@ -46,7 +46,7 @@ class ClassifyJob < ApplicationJob
       Dir.mkdir(label_path) unless File.exist? label_path
       classifier.input_assets.where(label: label).each do |asset|
         copy_path = File.join(label_path, asset.attachment.original_filename)
-        p "Saving #{copy_path}"
+        logger.info "Saving #{copy_path}"
         asset.attachment.copy_to_local_file(:original, copy_path)
       end
     end
