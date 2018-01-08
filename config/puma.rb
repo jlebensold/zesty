@@ -8,7 +8,7 @@ if ENV.fetch("RAILS_ENV") == "production"
   threads 1, 6
 
   app_dir = "/srv/www/zesty/current"
-  shared_dir = "#{app_dir}/../shared"
+  shared_dir = "/srv/www/zesty/shared"
 
   # Default to production
   rails_env = ENV['RAILS_ENV'] || "production"
