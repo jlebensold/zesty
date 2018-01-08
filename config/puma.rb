@@ -7,7 +7,7 @@ if ENV.fetch("RAILS_ENV") == "production"
   # Min and Max threads per worker
   threads 1, 6
 
-  app_dir = File.expand_path("../..", __FILE__)
+  app_dir = File.expand_path("../../..", __FILE__)
   shared_dir = "#{app_dir}/shared"
 
   # Default to production
