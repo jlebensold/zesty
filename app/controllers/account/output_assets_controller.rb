@@ -3,6 +3,11 @@
 module Account
   class OutputAssetsController < ApplicationController
 
+    def create
+
+      render json: { success: :ok }
+    end
+
     def show
       @asset = OutputAsset.find(params[:id])
       @url = account_output_asset_download_url(@asset)

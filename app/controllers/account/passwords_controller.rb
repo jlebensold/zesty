@@ -2,6 +2,7 @@
 
 module Account
   class PasswordsController < Devise::PasswordsController
+    layout "guest"
     # GET /resource/password/new
     # def new
     #   super
