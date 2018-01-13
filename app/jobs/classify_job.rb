@@ -34,11 +34,15 @@ class ClassifyJob < ApplicationJob
   end
 
   def prepare_job_folder(dir, id)
+    logger.info "Prepare job folder: #{dir} for #{id}"
     package = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{id}",
                                 headers: { 'X-Api-Key' => api_key })
-    zipfile = Tempfile.new("package.zip", "wb")
-    zipfile.write(package.body)
+    zipfile = Tempfile.new("package.zip")
+    File.open(zipfile, "wb") do |file|
+      file.write(package.body)
+    end
 
+    logger.info "Preparing: #{zipfile}"
     Zip::File.open(zipfile) do |zip_file|
       zip_file.each do |f|
         fpath = File.join(dir, f.name)
