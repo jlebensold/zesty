@@ -18,6 +18,7 @@ module Api
           end
         end
 			end
+      job.update_attributes(status: :started)
 			send_file zipfile_name,
 				type: 'application/zip',
 				disposition: 'attachment',

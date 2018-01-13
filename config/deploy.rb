@@ -46,7 +46,7 @@ task :setup do
 end
 
 desc "Deploys the current version to the server."
-task :deploy do
+task :deploy_web do
   # uncomment this line to make sure you pushed your local branch to the remote origin
   # invoke :'git:ensure_pushed'
   deploy do
@@ -64,13 +64,30 @@ task :deploy do
         command %(mkdir -p tmp/)
         command %(mkdir -p tmp/pids)
         command %(sudo systemctl restart puma)
+      end
+    end
+  end
+end
+
+task :deploy_worker do
+  # uncomment this line to make sure you pushed your local branch to the remote origin
+  # invoke :'git:ensure_pushed'
+  deploy do
+    # Put things that will set up an empty directory into a fully set-up
+    # instance of your project.
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:install'
+    invoke :'deploy:cleanup'
+
+    on :launch do
+      in_path(fetch(:current_path)) do
+        command %(mkdir -p tmp/)
+        command %(mkdir -p tmp/pids)
         command %(sudo systemctl restart sidekiq)
       end
     end
   end
-
-  # you can use `run :local` to run tasks on local machine before of after the deploy scripts
-  # run(:local){ say 'done' }
 end
 
 # For help in making your deploy script, see the Mina documentation:

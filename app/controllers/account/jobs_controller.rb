@@ -8,7 +8,7 @@ module Account
     def index; end
 
     def create
-      job = ClassificationJob.create!(classifier: @classifier, status: :started)
+      job = ClassificationJob.create!(classifier: @classifier, status: :created)
       ClassifyJob.perform_later job.id
       redirect_to account_classifier_jobs_path(@classifier), notice: "Job Started."
     end
