@@ -36,7 +36,7 @@ class ClassifyJob < ApplicationJob
   def prepare_job_folder(dir, id)
     package = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{id}",
                                 headers: { 'X-Api-Key' => api_key })
-    zipfile = File.new("package.zip", "wb")
+    zipfile = Tempfile.new("package.zip", "wb")
     zipfile.write(package.body)
 
     Zip::File.open(zipfile) do |zip_file|
