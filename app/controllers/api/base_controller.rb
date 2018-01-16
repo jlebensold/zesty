@@ -8,7 +8,7 @@ module Api
     private
 
     def authenticate
-      unless request.headers['X-Api-Key'] == Rails.application.secrets.api_password
+      unless request.headers["X-Api-Key"] == Rails.application.secrets.api_password
         render json: { status: :unauthorized }
       end
     end

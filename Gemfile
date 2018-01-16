@@ -18,8 +18,10 @@ gem "bootstrap", "~> 4.0.0.beta3"
 gem "jquery-rails"
 
 # Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
 gem "rest-client"
+gem "uglifier", ">= 1.3.0"
+
+gem "mailgun-ruby", "~>1.1.6"
 
 gem "rubyzip"
 

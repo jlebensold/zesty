@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ClassifyJob < ApplicationJob
-  require 'zip'
+  require "zip"
   queue_as :default
 
   FILES_TO_COLLECT = {
@@ -9,7 +9,7 @@ class ClassifyJob < ApplicationJob
     tensorflow: "graph.pb",
     labels: "labels.txt",
     optimized_tensorflow: "optimized_graph.pb"
-  }
+  }.freeze
 
   def path_to_crumbs
     Rails.application.secrets.path_to_crumbs
@@ -23,7 +23,6 @@ class ClassifyJob < ApplicationJob
     Rails.application.secrets.api_password
   end
 
-
   def perform(classification_job_id)
     logger.info "Starting Job ##{classification_job_id}"
     Dir.mktmpdir do |dir|
@@ -36,7 +35,7 @@ class ClassifyJob < ApplicationJob
   def prepare_job_folder(dir, id)
     logger.info "Prepare job folder: #{dir} for #{id}"
     package = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{id}",
-                                headers: { 'X-Api-Key' => api_key })
+                                          headers: { "X-Api-Key" => api_key })
     zipfile = Tempfile.new("package.zip")
     File.open(zipfile, "wb") do |file|
       file.write(package.body)
@@ -52,14 +51,10 @@ class ClassifyJob < ApplicationJob
     end
   end
 
-
-
   def collect_assets(job_id)
     FILES_TO_COLLECT.each do |label, filename|
       file_path = File.join(path_to_crumbs, "output", filename)
-      if !File.exists?(file_path)
-        logger.info "Asset #{file_path} missing. returning..."
-      end
+      logger.info "Asset #{file_path} missing. returning..." unless File.exist?(file_path)
       send_file(file_path, label, job_id)
       File.unlink(file_path)
     end
@@ -67,7 +62,7 @@ class ClassifyJob < ApplicationJob
 
   def send_file(path, label, id)
     RestClient::Request.execute(method: :post, url: "#{url}/output_assets",
-                                headers: { 'X-Api-Key' => api_key },
+                                headers: { "X-Api-Key" => api_key },
                                 payload: {
                                   label: label,
                                   file: File.new(path),

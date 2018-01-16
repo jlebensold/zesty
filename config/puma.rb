@@ -11,7 +11,7 @@ if ENV.fetch("RAILS_ENV") == "production"
   shared_dir = "/srv/www/zesty/shared"
 
   # Default to production
-  rails_env = ENV['RAILS_ENV'] || "production"
+  rails_env = ENV["RAILS_ENV"] || "production"
   environment rails_env
 
   # Set up socket location
@@ -27,7 +27,11 @@ if ENV.fetch("RAILS_ENV") == "production"
 
   on_worker_boot do
     require "active_record"
-    ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
+    begin
+      ActiveRecord::Base.connection.disconnect!
+    rescue StandardError
+      ActiveRecord::ConnectionNotEstablished
+    end
     ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
   end
 else

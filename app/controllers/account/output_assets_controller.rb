@@ -2,9 +2,7 @@
 
 module Account
   class OutputAssetsController < ApplicationController
-
     def create
-
       render json: { success: :ok }
     end
 
