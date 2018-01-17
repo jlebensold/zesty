@@ -3,12 +3,7 @@
 <html>
   <head>
     <title>CoreML and Tensorflow Image Classification with Pattern Gap</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Medula+One|Open+Sans|Raleway" rel="stylesheet">
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-		<%= stylesheet_link_tag 'marketing', media: 'all' %>
+    <%= render partial: "shared/head_section_public" %>
   </head>
 
   <body>
@@ -16,31 +11,21 @@
       <div class="site-wrapper-inner">
         <header class="masthead clearfix">
           <div class="inner">
-            <h3 class="masthead-brand">Pattern Gap</h3>
+            <h3 class="masthead-brand"><a href="/">patterngap</a></h3>
             <nav class="nav nav-masthead">
               <a class="nav-link active" href="#">Home</a>
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="/users/sign_up">Sign Up</a>
               <a class="nav-link" href="/users/sign_in" >Sign In</a>
             </nav>
           </div>
         </header>
-        <div style="padding-top: 55px">
+        <div>
           <%= render partial: "shared/alerts" %>
           <%= yield %>
         </div>
       </div>
     </div>
-    <footer class="pg-footer text-muted">
-      <div class="container">
-        <ul class="pg-footer-links">
-          <li><a href="https://twitter.com/getbootstrap">Twitter</a></li>
-          <li><a href="/examples/">Examples</a></li>
-          <li><a href="/about/history/">About</a></li>
-        </ul>
-        <p>.</p>
-        <p>Currently v4.0.0-alpha.6. Code licensed <a rel="license" href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, docs <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.</p>
-      </div>
-    </footer>
+    <%= render partial: "shared/footer_public" %>
   </body>
 </html>
 

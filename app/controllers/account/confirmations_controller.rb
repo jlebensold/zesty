@@ -2,6 +2,7 @@
 
 module Account
   class ConfirmationsController < Devise::ConfirmationsController
+    layout "guest"
     # GET /resource/confirmation/new
     # def new
     #   super

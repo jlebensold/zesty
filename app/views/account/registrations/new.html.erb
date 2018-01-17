@@ -1,0 +1,29 @@
+<h2>Create a new account</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field card">
+    <div class="card-body">
+      <%= f.label :organization, class: "sr-only" %>
+      <%= f.text_field :organization_name, autofocus: true, placeholder: "Organization Name", class: "form-control"  %>
+      <br/>
+      <%= f.label :email, class: "sr-only" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address", class: "form-control"  %>
+      <br/>
+      <%= f.label :password , class: "sr-only" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", placeholder: :password, class: "form-control" %>
+      <%= f.label :password_confirmation , class: "sr-only" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: :password_confirmation, class: "form-control" %>
+      <div class="actions" style="padding-top: 20px;">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render "account/shared/links" %>
