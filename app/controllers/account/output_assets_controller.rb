@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 module Account
-  class OutputAssetsController < ApplicationController
-    def create
-      render json: { success: :ok }
-    end
-
+  class OutputAssetsController < BaseController
     def show
       @asset = OutputAsset.find(params[:id])
       @url = account_output_asset_download_url(@asset)

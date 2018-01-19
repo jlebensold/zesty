@@ -1,0 +1,26 @@
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar masthead">
+  <a class="navbar-brand" href="/account/dashboard">patterngap
+  
+    <sup>
+      <span class="badge badge-warning" style="font-size: 12px; font-family: monaco">𝜶lpha</span>
+    </sup>
+  </a>
+	<div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+			<li class="nav-item <%= params[:controller] == 'account/dashboard' ? 'active' : '' %>">
+				<%= link_to "Dashboard", account_dashboard_path, { class: "nav-link" } %>
+			</li>
+			<li class="nav-item <%= params[:controller] == 'account/classifiers' ? 'active' : '' %>">
+				<%= link_to "How to Use", account_classifiers_path, { class: "nav-link" } %>
+			</li>
+		</ul>
+	</div>
+	<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex nav-masthead">
+		<li class="nav-item  <%= params[:controller] == 'account/profiles' ? 'active' : '' %>">
+			<%= link_to "<i class='fas fa-user'></i> #{current_user.email}".html_safe , account_profiles_path, { class: "nav-link" } %>
+		</li>
+		<li class="nav-item">
+			<%= link_to "Sign Out", destroy_user_session_path, { method: :delete, class: "nav-link" } %>
+		</li>
+	</ul>
+</header>

@@ -1,0 +1,17 @@
+<nav class="col-12 col-md-3 col-xl-2 bd-sidebar build-bar">
+  <p class="build-bar-title">Recent Builds</p>
+  <div class="list-group">
+    <% classification_jobs.each do |job| %>
+      <%= link_to account_classifier_job_path(classifier_id: job.classifier_id,
+                                              id: job.id ), class: "list-group-item justify-content-between" do  %>
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%=job.job_id %> <%= job.classifier_name %></h5>
+        <small><%= time_ago_in_words(job.created_at) %> ago</small>
+      </div>
+      <span class="badge badge-<%= classifier_bar_color(job.status) %> badge-pill">
+        <%= job.status %>
+      </span>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

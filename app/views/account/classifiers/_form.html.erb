@@ -1,7 +1,8 @@
 <div class="form-group">
-  <label>Organization</label>
-   <%= form.select :organization_id, Organization.all.map { |o| [o.name, o.id ] },
-     {}, { class: 'form-control' }  %>
+  <label>Organization:
+    <%= current_user.organization.name %>
+  </label>
+  <%= form.hidden_field :organization_id, value: current_user.organization_id %>
 </div>
 <div class="form-group">
   <label>Name</label>

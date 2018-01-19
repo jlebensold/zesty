@@ -2,6 +2,8 @@
  * Globals
  */
 
+$white: #FFF;
+$darkPurple: #331338;
 /* Links */
 
 /* Custom default button */
@@ -103,41 +105,8 @@ h1, h2, h3 {
 }
 
 
-/*
- * Affix and center
- */
-@media (min-width: 40em) {
-  /* Pull out the header and footer */
-  .masthead {
-    top: 0;
-  }
-  .mastfoot {
-    bottom: 0;
-  }
-
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-
-@media (min-width: 62em) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 42rem;
-  }
-}
 .masthead {
-  background: #331338;
-  width: 100%;
+  background: $darkPurple;
   .masthead-brand {
     font-family: 'Medula One', cursive;
     font-size: 24px;
@@ -208,4 +177,40 @@ h1, h2, h3 {
 }
 .pg-footer-links li+li{
   margin-left:1rem;
+}
+
+/* build-bar */
+.build-bar {
+  overflow: scroll;
+  background: lighten(desaturate($darkPurple, 45%), 10%);
+	height: calc(100vh - 4rem);
+  margin: 0;
+  padding: 0;
+  .list-group  {
+    padding-left: 0;
+    margin: 0;
+    border-radius: 0;
+    .list-group-item {
+      border-radius: 0;
+    }
+  }
+  .build-bar-title {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border-bottom: 1px solid #333;
+    color: #FFF;
+    margin: 0;
+  }
+  .build-bar-subtitle {
+    padding: 0.4rem;
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: lighten($darkPurple, 20%);
+    color: $white;
+    border-bottom: 1px solid $white;
+  }
+  ul {
+    padding-left: 0.4rem;
+  }
 }

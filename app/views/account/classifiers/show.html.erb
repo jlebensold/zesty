@@ -1,5 +1,5 @@
 <div class="row">
-	<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
 		<h1>Classifier <%= @classifier.name %></h1>
-	</main>
+    <%= link_to "Delete", account_classifier_path(classifier), method: :delete,
+      data: { confirm: "Are you sure?" } , class: "btn btn-sm btn-danger" %>
 </div>

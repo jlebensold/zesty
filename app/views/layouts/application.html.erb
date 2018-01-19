@@ -5,43 +5,24 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta charset="utf-8">
+
     <link href="https://fonts.googleapis.com/css?family=Medula+One|Open+Sans|Raleway" rel="stylesheet">
     <%= stylesheet_link_tag 'account', media: 'all' %>
   </head>
 
   <body>
 
-    <header class="masthead" style="padding-bottom: 60px">
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top ">
-        <a class="navbar-brand" href="/account/dashboard">patterngap</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item <%= params[:controller] == 'account/dashboard' ? 'active' : '' %>">
-							<%= link_to "Dashboard", account_dashboard_path, { class: "nav-link" } %>
-            </li>
-            <li class="nav-item  <%= params[:controller] == 'account/profiles' ? 'active' : '' %>">
-							<%= link_to "My Profile", account_profiles_path, { class: "nav-link" } %>
-            </li>
-            <li class="nav-item <%= params[:controller] == 'account/classifiers' ? 'active' : '' %>">
-							<%= link_to "My Classifiers", account_classifiers_path, { class: "nav-link" } %>
-            </li>
-          </ul>
-          <ul class="navbar-nav nav-masthead">
-            <li class="nav-item">
-							<%= link_to "Sign Out", destroy_user_session_path, { method: :delete, class: "nav-link" } %>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
+		<%= render 'shared/top_navbar_account' %>
     <div class="container-fluid">
-      <%= render 'shared/alerts' %>
-			<%= yield %>
+			<div class="row flex-xl-nowrap">
+				<%= render partial: 'shared/job_navbar_account', locals: { classification_jobs: @classification_jobs }  %>
+				<main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+					<%= render 'shared/alerts' %>
+					<%= yield %>
+				</main>
+			</div>
     </div>
 
   </body>
