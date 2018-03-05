@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Account
-  class InputAssetsController < ApplicationController
-    before_action :authenticate_user!
+  class InputAssetsController < BaseController
     before_action :fetch_classifier
 
     def index; end

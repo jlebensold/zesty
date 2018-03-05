@@ -1,6 +1,10 @@
 <div class="row">
 	<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-		<h1>New Classifier</h1>
+    <h1>New Classifier</h1>
+    <p>Machine Learning models need to be trained on images and videos that are organized by label.
+    Give your classifier a memorable name and a list of ASCII labels. Your model will learn how to detect these labels based on the videos and images you provide.
+    </p>
+    <p>List the labels for the image classifier. Each label needs to be in ASCII format, no spaces or special characters.</p>
 		<%= form_for [@classifier], { as: :classifier, url: account_classifiers_path(@classifier),
 																html: { class: "form_body" } } do |f| %>
 			<%= render partial: 'form', locals: { form: f } %>

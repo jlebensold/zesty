@@ -7,7 +7,7 @@ class OutputAsset < ApplicationRecord
   do_not_validate_attachment_file_type :attachment
   default_scope { order(id: :desc) }
 
-  delegate :job_number, to: :classification_job, prefix: false
+  delegate :job_id, to: :classification_job, prefix: false
 
   def icon
     return "fab fa-android" if label == "optimized_tensorflow"

@@ -1,10 +1,9 @@
 <div class="row">
-  <h1>Welcome to the patterngap
-  </h1>
+  <h2>Look! Your Dashboard</h2>
   <details class="col-md-12 alert alert-info">
     <summary>Learn how to build a custom image classifier</summary>
-
     <p>With Tensorflow and CoreML, you can quickly deploy a machine learning model on most mobile devices</p>
+    <p>Image classifiers include a custom set of labels. Each label needs to be a collection of images and/or videos (.m4v format).</p>
     <p>Check out our guides for some answers to common questions</p>
     <ul>
       <li><a href="#">How do I build a dataset for my model?</a></li>
@@ -16,34 +15,37 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <h4>Image Classifiers</h4>
-    <p>Image classifiers include a custom set of labels. Each label needs to be a collection of images and/or videos (.m4v format).</p>
-    <%=  link_to "Build Classifier", new_account_classifier_path, { class: "btn btn-primary" } %>
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Last Run</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @classifiers.each do |classifier | %>
+    <div class="">
+      <h4>Machine Learning Models</h4>
+      <%=  link_to "+ New Image Classifier".html_safe, new_account_classifier_path, { class: "btn btn-success btn-sm float-right" } %>
+      <table class="table table-striped table-sm">
+        <thead>
           <tr>
-            <td>
-              <%= link_to classifier.name, account_classifier_jobs_path(classifier), class: "" %>
-            </td>
-            <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>
-            <td>
-              <%= link_to "Details", account_classifier_path(classifier), class: "btn btn-sm btn-primary" %>
-            </td>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Last Run</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @classifiers.each do |classifier | %>
+            <tr>
+              <td>
+                <%= link_to classifier.name, account_classifier_jobs_path(classifier), class: "" %>
+              </td>
+              <td><small><%= classifier.model_type %></small></td>
+              <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>
+              <td style="text-align: right">
+                <%= link_to "Details", account_classifier_path(classifier), class: "btn btn-sm btn-outline-secondary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="col-md-4">
-    <h4>Recent Outputs</h4>
+    <h4>Recent Output Files</h4>
     <% @recent_assets.each do |asset| %>
       <a href="<%= account_output_asset_path(asset)  %>"
          class="list-group-item list-group-item-action justify-content-between d-flex lh-condensed" style="">

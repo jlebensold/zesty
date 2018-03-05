@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Account
-  class ClassifiersController < ApplicationController
+  class ClassifiersController < BaseController
     before_action :authenticate_user!
     before_action :fetch_model, only: %i[edit show update destroy]
 
@@ -27,7 +27,7 @@ module Account
       @classifier = Classifier.new(record_params)
 
       if @classifier.save!
-        redirect_to account_classifiers_path, notice: "Record has been created."
+        redirect_to account_classifier_input_assets_path(@classifier), notice: "Record has been created."
       else
         render :new
       end

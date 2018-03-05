@@ -1,3 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page"><%= link_to "Dashboard", account_dashboard_path %></li>
+    <li class="breadcrumb-item " aria-current="page">Classifiers</li>
+    <li class="breadcrumb-item" aria-current="page">
+      <%= link_to @classifier.name, account_classifier_path(@classifier) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Training Images</li>
+  </ol>
+</nav>
 <div class="row">
   <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
   <h1>Classifier <%= @classifier.name %></h1>
