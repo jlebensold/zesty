@@ -1,12 +1,12 @@
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar masthead">
   <a class="navbar-brand" href="/account/dashboard">patterngap
-  
+
     <sup>
-      <span class="badge badge-warning" style="font-size: 12px; font-family: monaco">𝜶lpha</span>
+      <span class="badge badge-warning" style="font-size: 0.6rem; font-family: monaco">𝜶lpha</span>
     </sup>
   </a>
 	<div class="navbar-nav-scroll">
-    <ul class="navbar-nav bd-navbar-nav flex-row">
+    <ul class="navbar-nav bd-navbar-nav flex-row nav-masthead">
 			<li class="nav-item <%= params[:controller] == 'account/dashboard' ? 'active' : '' %>">
 				<%= link_to "Dashboard", account_dashboard_path, { class: "nav-link" } %>
 			</li>

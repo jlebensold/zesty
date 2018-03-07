@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Api
-  class OutputAssetsController < BaseController
-    def create
+  class JobStatusController < BaseController
+    def update
       job = ClassificationJob.find(params[:id])
-      job.store_artifact!(params[:file], params[:label])
+      job.update_attributes(status: params[:status])
       render json: { success: :ok }
     end
   end

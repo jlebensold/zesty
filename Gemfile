@@ -22,7 +22,7 @@ gem "rest-client"
 gem "uglifier", ">= 1.3.0"
 
 gem "mailgun-ruby", "~>1.1.6"
-
+gem "dropzonejs-rails"
 gem "rubyzip"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -34,7 +34,6 @@ gem "sidekiq"
 
 gem "devise"
 gem "paperclip", "~> 5.0.0"
-
 gem "rqrcode"
 
 group :development, :test do

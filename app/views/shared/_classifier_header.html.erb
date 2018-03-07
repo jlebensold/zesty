@@ -1,0 +1,16 @@
+<div class="row justify-content-between" style="border-bottom: 1px solid #999">
+  <div class="col-md-6">
+    <div><%= classifier.name %><br/>
+    <small class="text-muted"><%= classifier.model_type %></small>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+        <a class="btn btn-outline-dark" href="<%= account_classifier_input_assets_path(classifier) %>"><i class="fa fa-tags"></i> Edit Labels</a>
+        <a class="btn btn-outline-dark" href="<%= account_classifier_input_assets_path(classifier) %>"><i class="fa fa-images"></i> Edit Training Images</a>
+        <%= link_to '<i class="fa fa-play"></i> Begin Job'.html_safe, account_classifier_jobs_path(classifier), { method: :post, class: "btn btn-outline-dark" } %>
+      </div>
+    </div>
+  </div>
+</div>

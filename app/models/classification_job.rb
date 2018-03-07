@@ -6,7 +6,42 @@ class ClassificationJob < ApplicationRecord
   delegate :name, to: :classifier, prefix: true
   default_scope { order(id: :desc) }
 
+
+  def clock_time
+    time_diff = created_at - updated_at
+    if Time.at(time_diff.to_i.abs).utc.strftime("%H") == "00"
+      return Time.at(time_diff.to_i.abs).utc.strftime "%M:%S"
+    end
+    Time.at(time_diff.to_i.abs).utc.strftime "%H:%M:%S"
+  end
+
+  def store_artifact!(file, label)
+    return store_log_artifact(file) if label == "log"
+    create_output_asset!(file, label)
+  end
+
+  def store_log_artifact(file)
+    log = output_assets.find_by(label: "log")
+    if log.blank?
+      create_output_asset!(file, "log")
+    else
+      log.update_attributes(attachment: file)
+    end
+  end
+
+  def create_output_asset!(file, label)
+    output_assets.create!(attachment: file, label: label, classifier: classifier)
+  end
+
   def job_id
     "##{job_number}"
+  end
+
+  def log_as_text
+    log_asset&.read_as_text
+  end
+
+  def log_asset
+    output_assets.find_by(label: :log)
   end
 end

@@ -1,0 +1,21 @@
+<div class="build-cards">
+	<div class="builds">
+		<% builds.each do |job| %>
+			<a href="<%= account_classifier_job_path(job.classifier, job)  %>" class="card <%= job.id == highlighted&.id ? "job-card-highlighted" : "" %> job-card" style="">
+				<div class="card-header text-center">
+					<small class="status status-<%= job.status %>"><%= job.status %></small>
+				</div>
+				<div class="card-footer">
+					<div class="row">
+						<div class="col-6">
+							<div class="">#<%= job.job_number %></div>
+						</div>
+						<div class="col-6 text-right">
+							<small class="align-self-end"  ><i class="fa fa-clock" style="font-weight: normal"></i> <%= job.clock_time %></small>
+						</div>
+					</div>
+				</div>
+			</a>
+		<% end %>
+	</div>
+</div>

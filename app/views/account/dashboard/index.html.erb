@@ -31,7 +31,7 @@
           <% @classifiers.each do |classifier | %>
             <tr>
               <td>
-                <%= link_to classifier.name, account_classifier_jobs_path(classifier), class: "" %>
+                <%= classifier.name %>
               </td>
               <td><small><%= classifier.model_type %></small></td>
               <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>

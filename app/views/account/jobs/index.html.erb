@@ -1,34 +1,5 @@
 <div class="row">
   <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-    <h1>Classifier <%= @classifier.name %></h1>
-    <h2>Output Assets</h2>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Created At</th>
-            <th>Type</th>
-            <th>Job</th>
-            <th>Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @classifier.output_assets.each do |asset| %>
-            <tr>
-              <td><%= asset.id %></td>
-              <td><%= asset.created_at %></td>
-              <td><%= asset.label %></td>
-              <td>Job #<%= asset.classification_job_id %></td>
-              <td>
-                <%= link_to "QR", account_output_asset_path(asset), class: "btn btn-secondary" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
     <h2>Jobs</h2>
     <%=  link_to "Classify ", account_classifier_jobs_path(@classifier), { method: :post, class: "btn btn-primary" } %>
     <div class="table-responsive">

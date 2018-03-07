@@ -1,0 +1,39 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page"><%= link_to "Dashboard", account_dashboard_path %></li>
+    <li class="breadcrumb-item" aria-current="page">Classifiers</li>
+    <li class="breadcrumb-item" aria-current="page"><%= link_to @classifier.name , account_classifier_path(@classifier) %> <%= %></li>
+    <li class="breadcrumb-item active" aria-current="page">Job #<%= @job.id %></li>
+  </ol>
+</nav>
+<div class="row bd-content-row">
+  <div class="col-md-12">
+    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier }  %>
+    <div class="row bd-content-wrap">
+      <div class="col-md-4">
+        <%= render partial: "shared/build_cards", locals: { builds: @classifier.classification_jobs, highlighted: @job } %>
+      </div>
+      <div class="col-md-8">
+        <div class="bd-content-scroll">
+          <div>Build Artifacts</div>
+          <% @job.output_assets.each do |asset| %>
+            <a target="_blank" href="<%= account_output_asset_download_path(asset)  %>" class="list-group-item list-group-item-action justify-content-between d-flex lh-condensed" style="">
+              <small>
+              <i style="font-size: 18px;" class="<%= asset.icon %>"></i>
+              <%= asset.name %>
+              </small>
+              <small><i class="fa fa-download"></i> Download</small>
+            </a>
+          <% end %>
+          <div>Build Log</div>
+          <div class="card">
+            <pre class="card-body" style="height: 500px; overflow: scroll"><code style="font-size: 11px;"><%= @log %></code></pre>
+          </div>
+          <p>
+          asld asdl ksald kasld kasld kasld askld kasd a
+          </p>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
