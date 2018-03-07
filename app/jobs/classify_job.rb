@@ -17,6 +17,12 @@ class ClassifyJob < ApplicationJob
     FILES_TO_COLLECT.count + 1
   end
 
+  rescue_from(StandardError) do |exception|
+    Rails.logger.error "[#{self.class.name}] Job failed: #{exception.to_s}"
+    update_server_status(:failed)
+    update_log_on_server
+  end
+
   def path_to_crumbs
     Rails.application.secrets.path_to_crumbs
   end

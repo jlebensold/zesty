@@ -78,6 +78,8 @@ GEM
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (0.7.0)
+    dropzonejs-rails (0.8.2)
+      rails (> 3.1)
     erubi (1.7.0)
     eventmachine (1.0.9.1)
     execjs (2.7.0)
@@ -291,6 +293,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   devise
+  dropzonejs-rails
   foreman
   jbuilder (~> 2.5)
   jquery-rails

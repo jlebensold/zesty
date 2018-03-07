@@ -11,7 +11,7 @@ module Account
 
     def update
       if @classifier.update_attributes(record_params)
-        redirect_to account_classifiers_path, notice: "Record has been updated."
+        redirect_to account_classifier_path(id: @classifier.id), notice: "Record has been updated."
       else
         render :edit
       end
@@ -21,6 +21,9 @@ module Account
 
     def new
       @classifier = Classifier.new
+    end
+
+    def edit
     end
 
     def create

@@ -19,7 +19,7 @@
     <div class="container-fluid main-container">
       <div class="row flex-xl-nowrap" style="height: 100%">
 				<%= render partial: 'shared/job_navbar_account', locals: { classification_jobs: @classification_jobs }  %>
-				<main class="bd-content">
+				<main class="col bd-content">
 					<%= render 'shared/alerts' %>
 					<%= yield %>
 				</main>

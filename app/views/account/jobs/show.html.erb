@@ -1,14 +1,12 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item" aria-current="page"><%= link_to "Dashboard", account_dashboard_path %></li>
-    <li class="breadcrumb-item" aria-current="page">Classifiers</li>
-    <li class="breadcrumb-item" aria-current="page"><%= link_to @classifier.name , account_classifier_path(@classifier) %> <%= %></li>
-    <li class="breadcrumb-item active" aria-current="page">Job #<%= @job.id %></li>
-  </ol>
-</nav>
-<div class="row bd-content-row">
+<%= breadcrumb [
+  { el: link_to("Dashboard", account_dashboard_path) },
+  { el: "Classifiers" },
+  { el: link_to(@classifier.name, account_classifier_path(@classifier)) },
+  { el: "build ##{@job.job_number}", active: true }
+] %>
+<div class="row main-row bd-content-row">
   <div class="col-md-12">
-    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier }  %>
+    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier, active: nil }  %>
     <div class="row bd-content-wrap">
       <div class="col-md-4">
         <%= render partial: "shared/build_cards", locals: { builds: @classifier.classification_jobs, highlighted: @job } %>
@@ -29,9 +27,6 @@
           <div class="card">
             <pre class="card-body" style="height: 500px; overflow: scroll"><code style="font-size: 11px;"><%= @log %></code></pre>
           </div>
-          <p>
-          asld asdl ksald kasld kasld kasld askld kasd a
-          </p>
         </div>
      </div>
     </div>

@@ -1,0 +1,39 @@
+<%= breadcrumb [
+  { el: link_to("Dashboard", account_dashboard_path) },
+  { el: "Classifiers" },
+  { el: link_to(@classifier.name, account_classifier_path(@classifier)) },
+  { el: "Edit Training Labels", active: true }
+] %>
+<div class="row main-row bd-content-row">
+  <div class="col-md-12">
+    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier, active: :labels }  %>
+    <%= form_for [@classifier], { as: :classifier, url: account_classifier_path(@classifier),
+                                html: { class: "form_body" } } do |f| %>
+      <div class="row justify-content-between">
+        <div class="col-7">
+          <p style="padding-top: 1rem">
+            <strong>Edit Training Labels</strong>
+            <br>
+            List the labels for the image classifier. Each label needs to be in ASCII format, no spaces or special characters.</p>
+          </p>
+        </div>
+        <div class="align-end" style="padding: 1rem">
+          <%= button_tag class: "btn btn-sm btn-primary" do %>
+            <i class='fa fa-save'></i> Update Labels
+          <% end %>
+        </div>
+      </div>
+      <div class="row bd-content-wrap">
+        <div class="col-md-12 bd-content-scroll">
+          <% if @classifier.inactive_asset_labels.present? %>
+            <div class="alert alert-warning">
+              Note: You have the following inactive labels:<br/>
+              <%= @classifier.inactive_asset_labels.map { |asset| asset[0] }.join(', ') %>
+            </div>
+          <% end %>
+          <%= render partial: 'form', locals: { form: f } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

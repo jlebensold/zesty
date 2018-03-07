@@ -14,7 +14,7 @@
   </details>
 </div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div class="">
       <h4>Machine Learning Models</h4>
       <%=  link_to "+ New Image Classifier".html_safe, new_account_classifier_path, { class: "btn btn-success btn-sm float-right" } %>
@@ -31,30 +31,21 @@
           <% @classifiers.each do |classifier | %>
             <tr>
               <td>
-                <%= classifier.name %>
+                <%= link_to classifier.name, account_classifier_path(classifier), class: "" %>
               </td>
               <td><small><%= classifier.model_type %></small></td>
               <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>
               <td style="text-align: right">
-                <%= link_to "Details", account_classifier_path(classifier), class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to '<i class="fa fa-play"></i> Build'.html_safe,
+          account_classifier_jobs_path(classifier), {
+          method: :post,
+          class: "btn btn-sm btn-outline-primary"
+        } %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="col-md-4">
-    <h4>Recent Output Files</h4>
-    <% @recent_assets.each do |asset| %>
-      <a href="<%= account_output_asset_path(asset)  %>"
-         class="list-group-item list-group-item-action justify-content-between d-flex lh-condensed" style="">
-         <small>
-        <i style="font-size: 18px;" class="<%= asset.icon %>"></i>
-        <%= asset.name %>
-         </small>
-        <small><%= asset.classifier.name %> <%= asset.job_id %></small>
-      </a>
-    <% end %>
   </div>
 </div>

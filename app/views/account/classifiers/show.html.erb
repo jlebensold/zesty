@@ -1,39 +1,31 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item" aria-current="page"><%= link_to "Dashboard", account_dashboard_path %></li>
-    <li class="breadcrumb-item" aria-current="page">Classifiers</li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @classifier.name %></li>
-  </ol>
-</nav>
-<div class="row bd-content-row">
+<%= breadcrumb [
+  { el: link_to("Dashboard", account_dashboard_path) },
+  { el: "Classifiers" },
+  { el: @classifier.name, active: true },
+] %>
+<div class="row main-row bd-content-row">
   <div class="col-md-12">
-    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier }  %>
+    <%= render partial: "shared/classifier_header", locals: { classifier: @classifier, active: nil }  %>
     <div class="row bd-content-wrap">
       <div class="col-md-4">
         <%= render partial: "shared/build_cards", locals: { builds: @classifier.classification_jobs, highlighted: nil} %>
       </div>
       <div class="col-md-8">
         <div class="bd-content-scroll">
-          <p>Labels</p>
-          <div id="accordion">
-            <% @classifier.asset_labels.each_with_index do |label, index| %>
-              <div class="card">
-                <div class="card-header" id="h-<%= index %>">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapseOne">
-                      <%= label %>
-                    </button>
-                  </h5>
-                </div>
-
-                <div id="collapse-<%= index %>" class="collapse" aria-labelledby="h-<%= index %>" data-parent="#accordion">
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <% if @classifier.active_asset_labels.empty? %>
+            <div class="alert alert-warning">
+              Note: you have no active training images for any active labels.
+            </div>
+          <% else %>
+            <b>Active Labels</b>
+          <% end %>
+          <% @classifier.active_asset_labels.each_with_index do |label, index| %>
+            <%= render partial: 'accordion_label', locals: { classifier: @classifier, index: "ac-#{index}", label: label[0], count: label[1] } %>
+          <% end %>
+          <b>Inactive Labels</b>
+          <% @classifier.inactive_asset_labels.each_with_index do |label, index| %>
+            <%= render partial: 'accordion_label', locals: { classifier: @classifier, index: "in-#{index}", label: label[0], count: label[1] } %>
+          <% end %>
           <details>
             <summary>Delete</summary>
             <div class="alert alert-danger">

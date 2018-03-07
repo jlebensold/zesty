@@ -7,6 +7,23 @@ class Classifier < ApplicationRecord
   has_many :classification_jobs, dependent: :destroy
   has_many :output_assets, dependent: :destroy
 
+  def grouped_asset_labels(label)
+    InputAsset.select(:label, :attachment_file_name)
+      .where(classifier_id: id)
+      .where(label: label).group(:label, :attachment_file_name)
+  end
+
+  def active_asset_labels
+    InputAsset.select(:label).where(classifier_id: id).group(:label).count
+  end
+
+  def inactive_asset_labels
+    InputAsset.select(:label)
+      .where(classifier_id: id)
+      .where.not(label: asset_labels)
+      .group(:label).count
+  end
+
   def model_type
     "image.MobileNet_v1_1.0_224"
   end

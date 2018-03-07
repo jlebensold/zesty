@@ -1,7 +1,7 @@
-<div class="build-cards">
+<div class="build-cards" id="build-list">
 	<div class="builds">
 		<% builds.each do |job| %>
-			<a href="<%= account_classifier_job_path(job.classifier, job)  %>" class="card <%= job.id == highlighted&.id ? "job-card-highlighted" : "" %> job-card" style="">
+      <a id="jid-<%= job.id %>" href="<%= account_classifier_job_path(job.classifier, job)  %>" class="card <%= job.id == highlighted&.id ? "job-card-highlighted" : "" %> job-card" style="">
 				<div class="card-header text-center">
 					<small class="status status-<%= job.status %>"><%= job.status %></small>
 				</div>
@@ -19,3 +19,12 @@
 		<% end %>
 	</div>
 </div>
+
+<script>
+$(function() {
+  var emt = document.getElementById('jid-<%= highlighted&.id %>');
+  if (emt) {
+    document.getElementById('build-list').scrollTop = emt.offsetTop - 10;
+  }
+});
+</script>

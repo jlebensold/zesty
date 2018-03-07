@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "/output_assets/:id/download", to: "output_assets#download", as: :output_asset_download
     resources :classifiers do
       resources :input_assets
+      resources :labels
       resources :jobs
     end
   end

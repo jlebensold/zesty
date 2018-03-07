@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header" id="h-<%= index %>">
+    <a class="btn btn-link" data-toggle="collapse" data-target="#collapse-<%= index %>"
+                                                   style="text-align: left;display: block;"
+                                                   aria-expanded="true" aria-controls="collapseOne">
+                                                   <%= label %>
+                                                   <small style="display: block; float: right;" ><%= count %> samples</small>
+    </a>
+  </div>
+  <div id="collapse-<%= index %>" class="collapse" aria-labelledby="h-<%= index %>" data-parent="#accordion">
+    <div class="card-body">
+      <ul>
+        <% classifier.grouped_asset_labels(label).each do |input_asset| %>
+          <li><%= input_asset.attachment_file_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

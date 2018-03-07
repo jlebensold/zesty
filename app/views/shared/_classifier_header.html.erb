@@ -4,12 +4,22 @@
     <small class="text-muted"><%= classifier.model_type %></small>
     </div>
   </div>
-  <div class="col-4">
+  <div class="align-end" style="padding-right: 1rem;">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group btn-group-sm" role="group" aria-label="First group">
-        <a class="btn btn-outline-dark" href="<%= account_classifier_input_assets_path(classifier) %>"><i class="fa fa-tags"></i> Edit Labels</a>
-        <a class="btn btn-outline-dark" href="<%= account_classifier_input_assets_path(classifier) %>"><i class="fa fa-images"></i> Edit Training Images</a>
-        <%= link_to '<i class="fa fa-play"></i> Begin Job'.html_safe, account_classifier_jobs_path(classifier), { method: :post, class: "btn btn-outline-dark" } %>
+        <%= link_to '<i class="fa fa-tags"></i> Edit Labels'.html_safe,
+          edit_account_classifier_path(classifier), {
+          class: "btn #{active == :labels ? "btn-dark " : "btn-outline-dark"}"
+        } %>
+        <%= link_to '<i class="fa fa-images"></i> Edit Training Images'.html_safe,
+          account_classifier_input_assets_path(classifier), {
+          class: "btn #{active == :images ? "btn-dark " : "btn-outline-dark"}"
+        } %>
+        <%= link_to '<i class="fa fa-play"></i> Build'.html_safe,
+          account_classifier_jobs_path(classifier), {
+          method: :post,
+          class: "btn btn-outline-primary"
+        } %>
       </div>
     </div>
   </div>
