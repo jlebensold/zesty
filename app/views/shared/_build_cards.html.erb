@@ -1,3 +1,8 @@
+<% if builds.empty? %>
+  <div class="alert alert-secondary" style="margin: 2rem 0">
+    No builds yet
+  </div>
+<% end %>
 <div class="build-cards" id="build-list">
 	<div class="builds">
 		<% builds.each do |job| %>

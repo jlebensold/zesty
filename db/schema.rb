@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117211741) do
+ActiveRecord::Schema.define(version: 20180308122649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180117211741) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "job_number", default: 1
+    t.datetime "started_at"
     t.index ["classifier_id"], name: "index_classification_jobs_on_classifier_id"
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Account
   class BaseController < ApplicationController
     before_action :authenticate_user!
@@ -5,7 +7,7 @@ module Account
 
     def fetch_sidebar_models
       @classification_jobs = ClassificationJob.joins(:classifier)
-        .where(classifiers: { organization: current_user.organization })
+                                              .where(classifiers: { organization: current_user.organization })
     end
   end
 end

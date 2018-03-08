@@ -7,7 +7,9 @@ module Account
     def index; end
 
     def create
-      @classifier.input_assets.create(label: params[:label], attachment: params[:file])
+      params[:file].each do |_key, file|
+        @classifier.input_assets.create(label: params[:label], attachment: file)
+      end
       render json: { status: :ok, notice: "Record(s) has been created." }
     end
 

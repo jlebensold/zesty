@@ -6,9 +6,9 @@ class ClassificationJob < ApplicationRecord
   delegate :name, to: :classifier, prefix: true
   default_scope { order(id: :desc) }
 
-
   def clock_time
-    time_diff = created_at - updated_at
+    return "-" if started_at.nil?
+    time_diff = started_at - updated_at
     if Time.at(time_diff.to_i.abs).utc.strftime("%H") == "00"
       return Time.at(time_diff.to_i.abs).utc.strftime "%M:%S"
     end

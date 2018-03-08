@@ -1,17 +1,19 @@
 <div class="row">
-  <h2>Look! Your Dashboard</h2>
-  <details class="col-md-12 alert alert-info">
-    <summary>Learn how to build a custom image classifier</summary>
-    <p>With Tensorflow and CoreML, you can quickly deploy a machine learning model on most mobile devices</p>
-    <p>Image classifiers include a custom set of labels. Each label needs to be a collection of images and/or videos (.m4v format).</p>
-    <p>Check out our guides for some answers to common questions</p>
-    <ul>
-      <li><a href="#">How do I build a dataset for my model?</a></li>
-      <li><a href="#">How do I integrate my mlmodel file into an iOS app?</a></li>
-      <li><a href="#">Walkthrough: building a CoreML model in a React Native application</a></li>
-      <li><a href="#">Walkthrough: adding a custom tensorflow image classifier</a></li>
-    </ul>
-  </details>
+  <div class="col-md-12">
+    <h2>Look! Your Dashboard</h2>
+    <details class="col-md-12 alert alert-info">
+      <summary>Learn how to build a custom image classifier</summary>
+      <p>With Tensorflow and CoreML, you can quickly deploy a machine learning model on most mobile devices</p>
+      <p>Image classifiers include a custom set of labels. Each label needs to be a collection of images and/or videos (.m4v format).</p>
+      <p>Check out our guides for some answers to common questions</p>
+      <ul>
+        <li><a href="#">How do I build a dataset for my model?</a></li>
+        <li><a href="#">How do I integrate my mlmodel file into an iOS app?</a></li>
+        <li><a href="#">Walkthrough: building a CoreML model in a React Native application</a></li>
+        <li><a href="#">Walkthrough: adding a custom tensorflow image classifier</a></li>
+      </ul>
+    </details>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -36,11 +38,11 @@
               <td><small><%= classifier.model_type %></small></td>
               <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>
               <td style="text-align: right">
-        <%= link_to '<i class="fa fa-play"></i> Build'.html_safe,
-          account_classifier_jobs_path(classifier), {
-          method: :post,
-          class: "btn btn-sm btn-outline-primary"
-        } %>
+                <%= link_to '<i class="fa fa-play"></i> Build'.html_safe,
+                  account_classifier_jobs_path(classifier), {
+                  method: :post,
+                  class: "btn btn-sm btn-outline-primary"
+                } %>
               </td>
             </tr>
           <% end %>

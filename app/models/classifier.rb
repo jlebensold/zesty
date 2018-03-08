@@ -9,19 +9,22 @@ class Classifier < ApplicationRecord
 
   def grouped_asset_labels(label)
     InputAsset.select(:label, :attachment_file_name)
-      .where(classifier_id: id)
-      .where(label: label).group(:label, :attachment_file_name)
+              .where(classifier_id: id)
+              .where(label: label).group(:label, :attachment_file_name)
   end
 
   def active_asset_labels
-    InputAsset.select(:label).where(classifier_id: id).group(:label).count
+    assets = InputAsset.select(:label).where(classifier_id: id).group(:label).count
+    asset_labels.map do |label|
+      [label, assets.find { |l| l[0] == label }.try(:[], 1) || 0]
+    end
   end
 
   def inactive_asset_labels
     InputAsset.select(:label)
-      .where(classifier_id: id)
-      .where.not(label: asset_labels)
-      .group(:label).count
+              .where(classifier_id: id)
+              .where.not(label: asset_labels)
+              .group(:label).count
   end
 
   def model_type

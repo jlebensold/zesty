@@ -3,7 +3,6 @@
 module Account
   class ProfilesController < BaseController
     before_action :authenticate_user!
-    def index
-    end
+    def index; end
   end
 end

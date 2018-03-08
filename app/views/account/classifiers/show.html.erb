@@ -27,7 +27,7 @@
             <%= render partial: 'accordion_label', locals: { classifier: @classifier, index: "in-#{index}", label: label[0], count: label[1] } %>
           <% end %>
           <details>
-            <summary>Delete</summary>
+            <summary>Delete Classifier</summary>
             <div class="alert alert-danger">
                 <p>Warning! Deleting your classifier will permanently destroy the classifier, assets, labels and input files.</p>
               <%= link_to "Delete Classifier", account_classifier_path(@classifier), method: :delete,

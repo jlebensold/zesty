@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'open3'
+
+require "open3"
 
 class ClassifyJob < ApplicationJob
   require "zip"
@@ -18,7 +19,7 @@ class ClassifyJob < ApplicationJob
   end
 
   rescue_from(StandardError) do |exception|
-    Rails.logger.error "[#{self.class.name}] Job failed: #{exception.to_s}"
+    Rails.logger.error "[#{self.class.name}] Job failed: #{exception}"
     update_server_status(:failed)
     update_log_on_server
   end
@@ -113,10 +114,10 @@ class ClassifyJob < ApplicationJob
     update_server_status(:training)
     count = 0
     @job_logger.tagged("Training") do
-      Open3.popen2e(cmd_args.join(" ")) do |stdin, stdout|
+      Open3.popen2e(cmd_args.join(" ")) do |_stdin, stdout|
         stdout.each_line do |line|
-          count = count + 1
-          @job_logger.info line.gsub("\n","")
+          count += 1
+          @job_logger.info line.delete("\n")
 
           update_log_on_server if count % 100 == 0
         end

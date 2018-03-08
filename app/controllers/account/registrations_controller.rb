@@ -63,7 +63,7 @@ module Account
     # end
     def build_resource(hash = {})
       self.resource = resource_class.new_with_session(hash.except(:organization_name), session)
-      self.resource.organization = Organization.new(name: hash[:organization_name])
+      resource.organization = Organization.new(name: hash[:organization_name])
     end
   end
 end
