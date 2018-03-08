@@ -33,7 +33,6 @@ Rails.application.configure do
   config.assets.compile = true
 
   config.assets.digest = true
-  config.assets.precompile += ["*.ttf", "*.woff", "*.svg", "*.eot"]
 
 
 

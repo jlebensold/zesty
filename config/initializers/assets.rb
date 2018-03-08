@@ -16,3 +16,5 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w[marketing.css account.css]
+
+Rails.application.config.assets.precompile += ["*.ttf", "*.woff", "*.svg", "*.eot"]
