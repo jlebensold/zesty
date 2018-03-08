@@ -17,4 +17,4 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts
 # folder are already added.
 Rails.application.config.assets.precompile += %w[marketing.css account.css]
 
-Rails.application.config.assets.precompile += ["*.ttf", "*.woff", "*.svg", "*.eot"]
+Rails.application.config.assets.precompile += ["*.ttf", "*.woff", "*.woff2", "*.svg", "*.eot"]
