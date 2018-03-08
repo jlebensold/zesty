@@ -2581,10 +2581,10 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
-  src: asset-url("/assets/gcfa-brands-400.eot");
-  src: asset-url("/assets/gcfa-brands-400.eot?#iefix")
-format("embedded-opentype"), asset-url("/assets/gcfa-brands-400.woff2")
-format("woff2"), asset-url("/assets/gcfa-brands-400.woff") format("woff"), asset-url("/assets/fa-brands-400.ttf") format("truetype"), asset-url("/assets/fa-brands-400.svg#fontawesome") format("svg"); }
+  src: asset_url("/assets/gcfa-brands-400.eot");
+  src: asset_url("/assets/gcfa-brands-400.eot?#iefix")
+format("embedded-opentype"), asset_url("/assets/gcfa-brands-400.woff2")
+format("woff2"), asset_url("/assets/gcfa-brands-400.woff") format("woff"), asset_url("/assets/fa-brands-400.ttf") format("truetype"), asset_url("/assets/fa-brands-400.svg#fontawesome") format("svg"); }
 
 .fab {
   font-family: 'Font Awesome 5 Brands'; }
@@ -2592,10 +2592,10 @@ format("woff2"), asset-url("/assets/gcfa-brands-400.woff") format("woff"), asset
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
-  src: asset-url("/assets/gcfa-regular-400.eot");
-  src: asset-url("/assets/gcfa-regular-400.eot?#iefix")
-format("embedded-opentype"), asset-url("/assets/gcfa-regular-400.woff2")
-format("woff2"), asset-url("/assets/gcfa-regular-400.woff") format("woff"), asset-url("/assets/fa-regular-400.ttf") format("truetype"), asset-url("/assets/fa-regular-400.svg#fontawesome") format("svg"); }
+  src: asset_url("/assets/gcfa-regular-400.eot");
+  src: asset_url("/assets/gcfa-regular-400.eot?#iefix")
+format("embedded-opentype"), asset_url("/assets/gcfa-regular-400.woff2")
+format("woff2"), asset_url("/assets/gcfa-regular-400.woff") format("woff"), asset_url("/assets/fa-regular-400.ttf") format("truetype"), asset_url("/assets/fa-regular-400.svg#fontawesome") format("svg"); }
 
 .far {
   font-family: 'Font Awesome 5 Free';
@@ -2605,10 +2605,10 @@ format("woff2"), asset-url("/assets/gcfa-regular-400.woff") format("woff"), asse
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
-  src: asset-url("/assets/gcfa-solid-900.eot");
-  src: asset-url("/assets/gcfa-solid-900.eot?#iefix")
-format("embedded-opentype"), asset-url("/assets/gcfa-solid-900.woff2")
-format("woff2"), asset-url("/assets/gcfa-solid-900.woff") format("woff"), asset-url("/assets/fa-solid-900.ttf") format("truetype"), asset-url("/assets/fa-solid-900.svg#fontawesome") format("svg"); }
+  src: asset_url("/assets/gcfa-solid-900.eot");
+  src: asset_url("/assets/gcfa-solid-900.eot?#iefix")
+format("embedded-opentype"), asset_url("/assets/gcfa-solid-900.woff2")
+format("woff2"), asset_url("/assets/gcfa-solid-900.woff") format("woff"), asset_url("/assets/fa-solid-900.ttf") format("truetype"), asset_url("/assets/fa-solid-900.svg#fontawesome") format("svg"); }
 
 .fa,
 .fas {
