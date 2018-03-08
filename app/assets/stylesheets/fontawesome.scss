@@ -2581,8 +2581,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
-  src: font-url("gcfa-brands-400.eot");
-  src: font-url("gcfa-brands-400.eot?#iefix") format("embedded-opentype"), font-url("gcfa-brands-400.woff2") format("woff2"), font-url("gcfa-brands-400.woff") format("woff"), font-url("/assets/fa-brands-400.ttf") format("truetype"), font-url("/assets/fa-brands-400.svg#fontawesome") format("svg"); }
+  src: asset-url("gcfa-brands-400.eot");
+  src: asset-url("gcfa-brands-400.eot?#iefix") format("embedded-opentype"), asset-url("gcfa-brands-400.woff2") format("woff2"), asset-url("gcfa-brands-400.woff") format("woff"), asset-url("/assets/fa-brands-400.ttf") format("truetype"), asset-url("/assets/fa-brands-400.svg#fontawesome") format("svg"); }
 
 .fab {
   font-family: 'Font Awesome 5 Brands'; }
@@ -2590,8 +2590,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
-  src: font-url("gcfa-regular-400.eot");
-  src: font-url("gcfa-regular-400.eot?#iefix") format("embedded-opentype"), font-url("gcfa-regular-400.woff2") format("woff2"), font-url("gcfa-regular-400.woff") format("woff"), font-url("/assets/fa-regular-400.ttf") format("truetype"), font-url("/assets/fa-regular-400.svg#fontawesome") format("svg"); }
+  src: asset-url("gcfa-regular-400.eot");
+  src: asset-url("gcfa-regular-400.eot?#iefix") format("embedded-opentype"), asset-url("gcfa-regular-400.woff2") format("woff2"), asset-url("gcfa-regular-400.woff") format("woff"), asset-url("/assets/fa-regular-400.ttf") format("truetype"), asset-url("/assets/fa-regular-400.svg#fontawesome") format("svg"); }
 
 .far {
   font-family: 'Font Awesome 5 Free';
@@ -2601,8 +2601,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
-  src: font-url("gcfa-solid-900.eot");
-  src: font-url("gcfa-solid-900.eot?#iefix") format("embedded-opentype"), font-url("gcfa-solid-900.woff2") format("woff2"), font-url("gcfa-solid-900.woff") format("woff"), font-url("/assets/fa-solid-900.ttf") format("truetype"), font-url("/assets/fa-solid-900.svg#fontawesome") format("svg"); }
+  src: asset-url("gcfa-solid-900.eot");
+  src: asset-url("gcfa-solid-900.eot?#iefix") format("embedded-opentype"), asset-url("gcfa-solid-900.woff2") format("woff2"), asset-url("gcfa-solid-900.woff") format("woff"), asset-url("/assets/fa-solid-900.ttf") format("truetype"), asset-url("/assets/fa-solid-900.svg#fontawesome") format("svg"); }
 
 .fa,
 .fas {
