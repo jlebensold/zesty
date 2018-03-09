@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "open3"
+require "socket"
 
 class ClassifyJob < ApplicationJob
   require "zip"
@@ -37,7 +38,7 @@ class ClassifyJob < ApplicationJob
   end
 
   def perform(classification_job_id)
-    @job_logger.info "Starting Job ##{classification_job_id}"
+    @job_logger.info "Starting Job ##{classification_job_id} on #{Socket.gethostname}"
     @job_id = classification_job_id
     update_server_status(:started)
     update_log_on_server

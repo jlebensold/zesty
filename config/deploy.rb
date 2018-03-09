@@ -79,7 +79,6 @@ task :deploy_worker do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'deploy:cleanup'
-
     on :launch do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
