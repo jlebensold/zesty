@@ -82,8 +82,8 @@ task :deploy_worker do
     invoke :'deploy:cleanup'
     on :launch do
       in_path(fetch(:current_path)) do
-        #command %(mkdir -p tmp/)
-        #command %(mkdir -p tmp/pids)
+        command %(mkdir -p tmp/)
+        command %(mkdir -p tmp/pids)
         command %(sudo systemctl restart sidekiq)
       end
     end
