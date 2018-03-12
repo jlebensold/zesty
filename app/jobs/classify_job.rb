@@ -11,7 +11,7 @@ class ClassifyJob < ApplicationJob
     mlmodel: "graph.mlmodel",
     tensorflow: "graph.pb",
     labels: "labels.txt",
-    optimized_tensorflow: "optimized_graph.pb"
+#    optimized_tensorflow: "optimized_graph.pb" # this is taking too long
   }.freeze
 
   def self.total_file_count
