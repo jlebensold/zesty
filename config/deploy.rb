@@ -77,8 +77,11 @@ task :deploy_worker do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
+    p "bundle:install"
     invoke :'bundle:install'
+    p "cleanup"
     invoke :'deploy:cleanup'
+    p "launch.."
     on :launch do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
