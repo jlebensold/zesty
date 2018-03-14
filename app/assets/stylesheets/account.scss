@@ -244,14 +244,24 @@ h1, h2, h3 {
   &.job-card-highlighted {
     background: lighten(desaturate($purple, 50%), 20%);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
     .status-completed {
       background: desaturate($green, 20%) !important;
+    }
+    .status-queued {
+      background: $gray-700;
     }
     .status-training {
       background: desaturate($purple, 20%) !important;
     }
+    .status-started {
+      background: $orange;
+    }
     .status-collecting {
       background: $purple !important;
+    }
+    .status-failed {
+      background: $red !important;
     }
   }
   .status {
@@ -309,6 +319,18 @@ h1, h2, h3 {
     }
     .status-collecting {
       background: $purple !important;
+    }
+    .status-queued {
+      background: $gray-700;
+    }
+    .status-started {
+      background: $orange;
+    }
+    .status-collecting {
+      background: $purple !important;
+    }
+    .status-failed {
+      background: $red !important;
     }
     .list-group-item {
       border-radius: 0;

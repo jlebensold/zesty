@@ -62,10 +62,22 @@
 </div>
 <script>
   window.dropzones = [];
+  window.uploadInProgress = false;
+  var processUpload = function() {
+    for(var i=0; i < dropzones.length; i++) {
+      if (!filesCompleted(dropzones[i]) && !uploadInProgress) {
+        uploadInProgress = true;
+        dropzones[i].processQueue();
+      }
+    }
+  }
+  var filesCompleted = function(dropzone) {
+    return dropzone.files.filter(function(r) { return r.status !== Dropzone.SUCCESS }).length === 0;
+  }
   $(function() {
     $("#upload-dropzones").click(function(evt) {
       evt.preventDefault();
-      dropzones.forEach(function(dz) { dz.processQueue(); });
+      processUpload();
     });
     $(".list-group").on("click", ".btn-destroy-image", function(evt) {
       evt.preventDefault();
@@ -84,14 +96,18 @@
       };
     });
     $(".dropzone").each( function(a, emt, index) {
-      dropzones.push(new Dropzone(emt, {
+      var dz = new Dropzone(emt, {
         autoProcessQueue: false,
         maxFiles: 1000,
         uploadMultiple: true,
         parallelUploads: 10000,
         dictDefaultMessage: 'Add files (e.g. jpg or m4v) for "' + emt.getAttribute('label') + '"',
-
-      }));
+      });
+      dz.on("queuecomplete", function() {
+        window.uploadInProgress = false;
+        processUpload();
+      });
+      dropzones.push(dz);
     });
   });
 </script>
