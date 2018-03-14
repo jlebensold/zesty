@@ -104,6 +104,9 @@
         timeout: 300000,
         dictDefaultMessage: 'Add files (e.g. jpg or m4v) for "' + emt.getAttribute('label') + '"',
       });
+      dz.on("successmultiple", function() {
+        dz.processQueue();
+      });
       dz.on("queuecomplete", function() {
         window.uploadInProgress = false;
         processUpload();
