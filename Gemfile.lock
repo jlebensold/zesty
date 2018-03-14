@@ -310,6 +310,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   devise
   dropzonejs-rails
+  excon
   fog-google
   foreman
   jbuilder (~> 2.5)
