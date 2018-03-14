@@ -100,16 +100,18 @@ Rails.application.configure do
 	# Do not dump schema after migrations.
 	config.active_record.dump_schema_after_migration = false
 
-	config.paperclip_defaults = {
-		storage: :fog,
-		fog_credentials: {
-			provider: 'Google',
-			google_project: ENV['GCS_PROJECT'],
-			google_client_email: ENV['GCS_CLIENT_EMAIL'],
-			google_json_key_string: Base64.decode64(ENV['GCS_SECRET_JSON_KEY_STRING_BASE64'])
+	if ENV['GCS_SECRET_JSON_KEY_STRING_BASE64'].present?
+		config.paperclip_defaults = {
+			storage: :fog,
+			fog_credentials: {
+				provider: 'Google',
+				google_project: ENV['GCS_PROJECT'],
+				google_client_email: ENV['GCS_CLIENT_EMAIL'],
+				google_json_key_string: Base64.decode64(ENV['GCS_SECRET_JSON_KEY_STRING_BASE64'])
 
-		# Google recommend you to use service account instead of HMAC credentials
-		# You can check other options here -> https://github.com/fog/fog-google#credentials
+			# Google recommend you to use service account instead of HMAC credentials
+			# You can check other options here -> https://github.com/fog/fog-google#credentials
+			}
 		}
-	}
+	end
 end
