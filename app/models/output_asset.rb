@@ -16,7 +16,8 @@ class OutputAsset < ApplicationRecord
     file = CloudStorage.fetch_file(attachment.path(:original))
     downloaded = file.download
     downloaded.rewind
-    IO.readlines(downloaded).reverse.join
+    lines = downloaded.read.split("\n")
+    lines.reverse.join("\n")
   end
 
   def icon
