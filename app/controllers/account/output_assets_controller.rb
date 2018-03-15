@@ -11,9 +11,6 @@ module Account
       @asset = OutputAsset.find(params[:id])
       file = CloudStorage.fetch_file(@asset.attachment.path(:original))
       redirect_to file.signed_url, x_sendfile: true
-      #send_file(@asset.attachment.path, x_sendfile: true,
-      #                                  type: @asset.attachment.content_type,
-      #                                  filename: @asset.attachment.original_filename)
     end
   end
 end
