@@ -4,6 +4,7 @@ class CloudStorage
       project_id: ENV["GCS_PROJECT"],
       credentials: ENV["GCS_KEYFILE"]
     )
-    storage.bucket ENV["GCS_BUCKET_NAME"]
+    bucket = storage.bucket ENV["GCS_BUCKET_NAME"]
+    bucket.file path
   end
 end
