@@ -12,7 +12,9 @@ class InputAsset < ApplicationRecord
         project_id: ENV["GCS_PROJECT"],
         credentials: ENV["GCS_KEYFILE"]
       )
-      return storage.bucket ENV["GCS_BUCKET_NAME"]
+      bucket = storage.bucket ENV["GCS_BUCKET_NAME"]
+      bucket.file(attachment.path(:original))
+      file.download copy_path
     else
       attachment.copy_to_local_file(:original, copy_path)
     end
