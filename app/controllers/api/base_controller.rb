@@ -2,7 +2,7 @@
 
 module Api
   class BaseController < ApplicationController
-    # before_action :authenticate
+    before_action :authenticate
     skip_before_action :verify_authenticity_token
 
     private
