@@ -14,7 +14,7 @@ class InputAsset < ApplicationRecord
       )
       bucket = storage.bucket ENV["GCS_BUCKET_NAME"]
       file = CloudStorage.fetch_file(attachment.path(:original))
-      file.download copy_path
+      file.download copy_path, verify: :all
     else
       attachment.copy_to_local_file(:original, copy_path)
     end
