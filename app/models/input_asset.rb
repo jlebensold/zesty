@@ -18,5 +18,8 @@ class InputAsset < ApplicationRecord
     else
       attachment.copy_to_local_file(:original, copy_path)
     end
+  rescue StandardError => error
+    p error
+    return nil
   end
 end
