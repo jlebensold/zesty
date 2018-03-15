@@ -12,7 +12,7 @@ module Api
           job.classifier.input_assets.where(label: label).each_with_index do |asset, _index|
             copy_path = Tempfile.new("file", Rails.root.join("tmp"))
             logger.info "Saving #{copy_path}"
-            asset.attachment.copy_to_local_file(:original, copy_path)
+            asset.copy_to_local_file(copy_path)
             if File.exist? copy_path
               zipfile.add("#{label}/#{asset.id}_#{asset.attachment.original_filename}", copy_path)
             end

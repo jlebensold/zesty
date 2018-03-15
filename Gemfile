@@ -35,6 +35,7 @@ gem "sidekiq"
 gem "devise"
 gem "paperclip", "~> 5.0.0"
 gem "paperclip-gcs"
+gem "google-cloud-storage"
 gem "rqrcode"
 
 
