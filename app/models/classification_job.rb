@@ -8,7 +8,7 @@ class ClassificationJob < ApplicationRecord
 
   def clock_time
     return "-" if started_at.nil?
-    time_diff = started_at - updated_at
+    time_diff = status == :completed ?  started_at - updated_at : started_at - Time.zone.now
     if Time.at(time_diff.to_i.abs).utc.strftime("%H") == "00"
       return Time.at(time_diff.to_i.abs).utc.strftime "%M:%S"
     end
