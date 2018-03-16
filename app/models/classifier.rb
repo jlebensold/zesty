@@ -13,6 +13,14 @@ class Classifier < ApplicationRecord
               .where(label: label).group(:label, :attachment_file_name)
   end
 
+  def sample_count
+    input_assets.count
+  end
+
+  def calculate_bytes
+    input_assets.map { |ia| ia.attachment_file_size }.sum
+  end
+
   def active_asset_labels
     assets = InputAsset.select(:label).where(classifier_id: id).group(:label).count
     asset_labels.map do |label|

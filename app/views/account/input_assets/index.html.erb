@@ -15,6 +15,7 @@
 				 Upload images (.jpg) or video files (.m4v format) for each label.</p>
 			</div>
 			<div class="align-end" style="padding: 1rem">
+				<a href="#" class="btn btn-sm btn-secondary" id="cancel-dropzones"><i class="fa fa-ban"></i> Cancel</a>
 				<a href="#" class="btn btn-sm btn-primary" id="upload-dropzones"><i class="fa fa-upload"></i> Begin Upload</a>
 			</div>
 		</div>
@@ -39,14 +40,19 @@
                     <% end %>
                   </div>
                   <div>Existing assets:</div>
-                  <ul class="list-group">
+                  <ul class="list-group asset-list-group">
                     <% @classifier.input_assets.where(label: label).each do |input_asset| %>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <%= input_asset.attachment.original_filename %>
+                        <div class="col-auto">
+                          <img src="<%= input_asset.thumbnail_url %>" />
+                        </div>
+                        <div  class="col"><%= input_asset.attachment.original_filename %></div>
+                        <div class="col-1">
                         <%= link_to "<i class='fa fa-trash'></i>".html_safe,
                           account_classifier_input_asset_path(@classifier, input_asset),
                           filename: input_asset.attachment.original_filename,
                           class: "btn btn-sm btn-danger btn-destroy-image" %>
+                      </div>
                       </li>
                     <% end %>
                   </ul>
@@ -99,6 +105,8 @@
       var dz = new Dropzone(emt, {
         autoProcessQueue: false,
         maxFiles: 1000,
+        thumbnailWidth: 80,
+        thumbnailHeight: 80,
         uploadMultiple: true,
         parallelUploads: 10,
         timeout: 300000,

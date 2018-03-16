@@ -7,7 +7,6 @@
  * Globals
  */
 
-$darkPurple: #331338;
 /* Links */
 
 /* Custom default button */
@@ -381,6 +380,24 @@ ol.breadcrumb li a {
 	color: darken(theme-color("secondary"), 10%);
 }
 
+/* account_input_assets#index */
+
+.asset-list-group {
+  li.list-group-item {
+    padding: 0.05rem 1.25rem;
+    height: 60px;
+    img {
+      height: 60px;
+      border: 1px solid #EEE;
+      background: #CACACA;
+      min-width: 60px;
+    }
+    &:hover {
+      background: lighten($darkPurple, 80%);
+    }
+  }
+}
+
 /* file upload */
 .dropzone {
 	min-height: 30px;
@@ -389,6 +406,54 @@ ol.breadcrumb li a {
 	border: 1px solid $gray-400;
 	.dz-message {
 	  margin: 1rem;
+  }
+  .dz-preview.dz-file-preview {
+    .dz-filename {
+      line-height: 0;
+    }
+    .dz-image {
+      height: 50px;
+      width: 50px;
+      border-radius: 5px;
+      background: darken($purple, 0%);
+    }
+  }
+
+
+  .dz-preview {
+    height: 80px;
+    min-height: 80px;
+    width: auto;
+    display: flex;
+		margin: 1px;
+		font-family: $font-family-sans-serif;
+    .dz-image {
+      border-radius: 5px;
+      overflow: auto;
+    }
+		.dz-progress {
+			background: lighten($purple, 30%);
+			width: 160px;
+		}
+    .dz-details {
+			.dz-size {
+				float: right;
+				font-size: 1rem;
+				vertical-align: middle;
+				font-weight: 300;
+			}
+			.dz-filename {
+				text-align: left;
+				vertical-align: middle;
+				font-weight: 300;
+				font-size: 1rem;
+			}
+			position: auto;
+      min-width: auto;
+      max-width: auto;
+      position: relative;
+			flex: 6;
+    }
   }
 }
 

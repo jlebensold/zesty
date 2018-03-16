@@ -1,7 +1,7 @@
 <div class="row justify-content-between" style="border-bottom: 1px solid #999">
   <div class="col-md-6">
     <div><%= classifier.name %><br/>
-    <small class="text-muted"><%= classifier.model_type %></small>
+    <small class="text-muted"><%= classifier.model_type %>, <%= number_to_human_size(classifier.calculate_bytes) %></small>
     </div>
   </div>
   <div class="align-end" style="padding-right: 1rem;">

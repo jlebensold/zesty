@@ -25,6 +25,7 @@
           <tr>
             <th>Name</th>
             <th>Type</th>
+            <th colspan="3">Details</th>
             <th>Last Run</th>
             <th></th>
           </tr>
@@ -36,7 +37,16 @@
                 <%= link_to classifier.name, account_classifier_path(classifier), class: "" %>
               </td>
               <td><small><%= classifier.model_type %></small></td>
-              <td><%= classifier.last_run_at.to_s %> <small><%= classifier.last_run_job_id %></td>
+              <td>
+                <%= classifier.active_asset_labels.count %> labels
+              </td>
+              <td>
+                <%= classifier.sample_count %> training samples
+              </td>
+              <td>
+                <%= number_to_human_size(classifier.calculate_bytes) %>
+              </td>
+              <td><%= classifier.last_run_at.to_s %> </td>
               <td style="text-align: right">
                 <%= link_to '<i class="fa fa-play"></i> Build'.html_safe,
                   account_classifier_jobs_path(classifier), {

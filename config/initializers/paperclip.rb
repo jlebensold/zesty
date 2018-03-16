@@ -6,6 +6,7 @@ Paperclip.options[:content_type_mappings] = {
   log: "text/plain"
 }
 
+Paperclip::Attachment.default_options[:url] = "/system/:class/:attachment/:id_partition/:style/:filename"
 if Rails.env.production?
   Paperclip::Attachment.default_options[:storage] = :gcs
   Paperclip::Attachment.default_options[:gcs_bucket] = ENV["GCS_BUCKET_NAME"]
