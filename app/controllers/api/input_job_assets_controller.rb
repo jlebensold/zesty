@@ -4,7 +4,11 @@ require "zip"
 module Api
   class InputJobAssetsController < BaseController
     def show
-      job = ClassificationJob.find(params[:id])
+      @job = ClassificationJob.find(params[:id])
+
+      render json: @job.as_worker_manifest
+
+      return
       zipfile_name = Tempfile.new(["job", ".zip"], Rails.root.join("tmp"))
       Zip::File.open(zipfile_name.path, Zip::File::CREATE) do |zipfile|
         files = []

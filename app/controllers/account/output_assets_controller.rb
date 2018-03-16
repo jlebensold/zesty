@@ -9,8 +9,7 @@ module Account
 
     def download
       @asset = OutputAsset.find(params[:id])
-      file = CloudStorage.fetch_file(@asset.attachment.path(:original))
-      redirect_to file.signed_url, x_sendfile: true
+      StorageManager.new.send_file(@asset, self)
     end
   end
 end

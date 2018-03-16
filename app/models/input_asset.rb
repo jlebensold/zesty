@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "google/cloud/storage"
 
 class InputAsset < ApplicationRecord
@@ -6,18 +7,12 @@ class InputAsset < ApplicationRecord
   has_attached_file :attachment
   do_not_validate_attachment_file_type :attachment
 
+  def public_url
+    StorageManager.new.public_url(self, "input")
+  end
+
   def copy_to_local_file(copy_path)
-    if Rails.env.production?
-      storage = Google::Cloud::Storage.new(
-        project_id: ENV["GCS_PROJECT"],
-        credentials: ENV["GCS_KEYFILE"]
-      )
-      bucket = storage.bucket ENV["GCS_BUCKET_NAME"]
-      file = CloudStorage.fetch_file(attachment.path(:original))
-      file.download copy_path, verify: :all
-    else
-      attachment.copy_to_local_file(:original, copy_path)
-    end
+    StorageManager.new.copy_to_local_file(self, copy_path)
   rescue StandardError => error
     p error
     return nil

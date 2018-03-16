@@ -10,17 +10,7 @@ class OutputAsset < ApplicationRecord
   delegate :job_id, to: :classification_job, prefix: false
 
   def read_as_text
-    Rails.env.production? ?
-      read_as_text_from_cloud_storage :
-      IO.readlines(attachment.path).reverse.join
-  end
-
-  def read_as_text_from_cloud_storage
-    file = CloudStorage.fetch_file(attachment.path(:original))
-    downloaded = file.download
-    downloaded.rewind
-    lines = downloaded.read.split("\n")
-    lines.reverse.join("\n")
+    StorageManager.new.read_as_text(self)
   end
 
   def icon

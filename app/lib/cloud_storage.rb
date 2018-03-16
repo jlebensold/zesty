@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CloudStorage
   def self.fetch_file(path)
     storage = Google::Cloud::Storage.new(
