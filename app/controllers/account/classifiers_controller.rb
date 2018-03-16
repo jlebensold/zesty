@@ -23,8 +23,6 @@ module Account
       @classifier = Classifier.new
     end
 
-    def edit; end
-
     def create
       @classifier = Classifier.new(record_params)
 

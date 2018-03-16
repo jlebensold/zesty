@@ -54,21 +54,20 @@ class ClassifyJob < ApplicationJob
 
   def prepare_job_folder(dir)
     @job_logger.info "Prepare job folder: #{dir} for #{@job_id}"
-    package = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{@job_id}",
-                                          headers: { "X-Api-Key" => api_key })
-    zipfile = Tempfile.new("package.zip")
-    File.open(zipfile, "wb") do |file|
-      file.write(package.body)
-    end
-
-    @job_logger.tagged("File Preparation") do
-      Zip::File.open(zipfile) do |zip_file|
-        zip_file.each do |f|
-          fpath = File.join(dir, f.name)
-          FileUtils.mkdir_p(File.dirname(fpath))
-          @job_logger.info "Extracting: #{f}"
-          zip_file.extract(f, fpath) unless File.exist?(fpath)
-        end
+    json = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{@job_id}",
+                                       headers: { "X-Api-Key" => api_key })
+    manifest = JSON.parse(json.body)
+    manifest.each do |input_asset|
+      params = input_asset.deep_symbolize_keys
+      params[:labels].each do |label|
+        fpath = File.join(dir, label)
+        FileUtils.mkdir_p(fpath)
+        @job_logger.info "Fetching: #{params[:id]}"
+        response = RestClient::Request.execute(method: :get, url: params[:url],
+                                               headers: { "X-Api-Key" => api_key })
+        file = File.new("#{fpath}/#{params[:filename]}", "wb")
+        file << response.body
+        file.close
       end
     end
   end

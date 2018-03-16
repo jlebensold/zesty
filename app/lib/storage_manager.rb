@@ -65,7 +65,7 @@ class StorageManager
     end
 
     def public_url(asset, asset_type)
-      "#{api_url}/asset/#{asset.id}?type=#{asset_type}"
+      "#{api_url}/assets/#{asset.id}?type=#{asset_type}"
     end
 
     def read_as_text(asset)

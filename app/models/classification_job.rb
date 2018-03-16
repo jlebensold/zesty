@@ -47,7 +47,12 @@ class ClassificationJob < ApplicationRecord
 
   def as_worker_manifest
     classifier.input_assets.map do |asset|
-      { id: asset.id, uri: asset.public_url, labels: [asset.label] }
+      {
+        id: asset.id,
+        url: asset.public_url,
+        labels: [asset.label.strip],
+        filename: "#{Digest::SHA1.hexdigest("#{asset.label}#{asset.id}")}_#{asset.attachment.original_filename}"
+      }
     end
   end
 end
