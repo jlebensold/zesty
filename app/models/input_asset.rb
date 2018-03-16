@@ -13,7 +13,7 @@ class InputAsset < ApplicationRecord
   end
 
   def thumbnail_url
-    attachment.url(:thumb)
+    StorageManager.new.thumbnail_url(self)
   end
 
   def copy_to_local_file(copy_path)

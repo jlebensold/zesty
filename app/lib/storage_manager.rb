@@ -23,6 +23,10 @@ class StorageManager
     @backend.public_url(asset, type)
   end
 
+  def thumbnail_url(asset)
+    @backend.thumbnail_url(asset)
+  end
+
   class GoogleBackend
     def send_file(asset, controller)
       controller.redirect_to public_url(asset), x_sendfile: true
@@ -41,6 +45,11 @@ class StorageManager
       lines.reverse.join("\n")
     end
 
+    def thumbnail_url(asset)
+      file = CloudStorage.fetch_file(asset.attachment.path(:thumb))
+      file.signed_url
+    end
+
     def public_url(asset, _type = nil)
       file = CloudStorage.fetch_file(asset.attachment.path(:original))
       file.signed_url
@@ -56,6 +65,10 @@ class StorageManager
 
     def copy_to_local_file(asset, copy_path)
       asset.attachment.copy_to_local_file(:original, copy_path)
+    end
+
+    def thumbnail_url(asset)
+      asset.attachment.url(:thumb)
     end
 
     def send_file(asset, controller)
