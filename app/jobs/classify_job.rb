@@ -4,7 +4,6 @@ require "open3"
 require "socket"
 
 class ClassifyJob < ApplicationJob
-  require "zip"
   queue_as :default
 
   FILES_TO_COLLECT = {
