@@ -6,7 +6,7 @@ module Api
       job = ClassificationJob.find(params[:id])
       update_params = { status: params[:status] }
       update_params[:started_at] = Time.zone.now if params[:status] == "started"
-      job.update_attributes(update_params)
+      job.update(update_params)
       render json: { success: :ok }
     end
   end

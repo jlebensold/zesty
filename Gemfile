@@ -33,6 +33,9 @@ gem "jbuilder", "~> 2.5"
 gem "sidekiq"
 
 gem "devise"
+gem "devise_token_auth"
+gem "omniauth"
+
 gem "google-cloud-storage"
 gem "paperclip", "~> 5.0.0"
 gem "paperclip-gcs"

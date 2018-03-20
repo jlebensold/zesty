@@ -4,7 +4,7 @@ module Api
   class InputJobAssetsController < BaseController
     def show
       job = ClassificationJob.find(params[:id])
-      job.update_attributes(status: :started)
+      job.update(status: :started)
       render json: job.as_worker_manifest
     end
   end

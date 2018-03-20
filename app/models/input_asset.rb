@@ -5,7 +5,7 @@ require "google/cloud/storage"
 class InputAsset < ApplicationRecord
   belongs_to :classifier
   has_attached_file :attachment,
-    :styles => {:thumb => ["90x90#", :jpg]}
+                    styles: { thumb: ["90x90#", :jpg] }
   do_not_validate_attachment_file_type :attachment
 
   def public_url
@@ -20,6 +20,6 @@ class InputAsset < ApplicationRecord
     StorageManager.new.copy_to_local_file(self, copy_path)
   rescue StandardError => error
     p error
-    return nil
+    nil
   end
 end

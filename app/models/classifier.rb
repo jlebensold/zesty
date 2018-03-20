@@ -18,7 +18,7 @@ class Classifier < ApplicationRecord
   end
 
   def calculate_bytes
-    input_assets.map { |ia| ia.attachment_file_size }.sum
+    input_assets.map(&:attachment_file_size).sum
   end
 
   def active_asset_labels

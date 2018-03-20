@@ -25,7 +25,7 @@ class ClassificationJob < ApplicationRecord
     if log.blank?
       create_output_asset!(file, "log")
     else
-      log.update_attributes(attachment: file)
+      log.update(attachment: file)
     end
   end
 

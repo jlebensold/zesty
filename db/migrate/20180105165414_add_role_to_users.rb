@@ -13,6 +13,6 @@ class AddRoleToUsers < ActiveRecord::Migration[5.1]
 
     execute <<-SQL
  		 DROP TYPE role;
- 	 SQL
+    SQL
   end
 end
