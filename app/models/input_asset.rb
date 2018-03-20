@@ -19,7 +19,6 @@ class InputAsset < ApplicationRecord
   def copy_to_local_file(copy_path)
     StorageManager.new.copy_to_local_file(self, copy_path)
   rescue StandardError => error
-    p error
-    nil
+    Rails.logger.info error
   end
 end

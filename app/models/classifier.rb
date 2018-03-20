@@ -7,6 +7,18 @@ class Classifier < ApplicationRecord
   has_many :classification_jobs, dependent: :destroy
   has_many :output_assets, dependent: :destroy
 
+  after_validation :cleanup_labels
+
+  def cleanup_labels
+    self.labels = asset_labels.map do |label|
+      label.strip
+        .gsub(/\ /,'_')
+        .gsub(/\W/,'')
+        .downcase
+        .truncate(30, omission: "")
+    end.uniq.compact.join("\r\n")
+  end
+
   def grouped_asset_labels(label)
     InputAsset.select(:label, :attachment_file_name)
               .where(classifier_id: id)

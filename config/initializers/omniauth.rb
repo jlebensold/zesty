@@ -2,6 +2,6 @@
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   require "openid/store/filesystem"
-  # TODO:
+  # TODO: implement github support
   #  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
 end

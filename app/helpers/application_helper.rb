@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/OutputSafety
 module ApplicationHelper
   def breadcrumb(items)
     content_tag :nav do
@@ -20,3 +21,5 @@ module ApplicationHelper
     "warning"
   end
 end
+
+# rubocop:enable Rails/OutputSafety

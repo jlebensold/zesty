@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -112,3 +114,5 @@ Rails.application.configure do
     }
   end
 end
+
+# rubocop:enable Metrics/BlockLength

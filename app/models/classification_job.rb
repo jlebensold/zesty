@@ -8,11 +8,23 @@ class ClassificationJob < ApplicationRecord
 
   def clock_time
     return "-" if started_at.nil?
-    time_diff = status == "completed" ? started_at - updated_at : started_at - Time.zone.now
-    if Time.at(time_diff.to_i.abs).utc.strftime("%H") == "00"
-      return Time.at(time_diff.to_i.abs).utc.strftime "%M:%S"
-    end
-    Time.at(time_diff.to_i.abs).utc.strftime "%H:%M:%S"
+    time_diff = calc_time_diff
+    Time.at(time_diff).utc.strftime clock_time_format(time_diff)
+  end
+
+  def clock_time_format(time_diff)
+    return "%M:%S" if time_diff_less_than_hour?(time_diff)
+    "%H:%M:%S"
+  end
+
+  def time_diff_less_than_hour?(time_diff)
+    Time.at(time_diff).utc.strftime("%H") == "00"
+  end
+
+  def calc_time_diff
+    return (started_at - updated_at).to_i.abs if status == "completed"
+    return (started_at - updated_at).to_i.abs if status == "failed"
+    (started_at - Time.zone.now).to_i.abs
   end
 
   def store_artifact!(file, label)
@@ -50,7 +62,7 @@ class ClassificationJob < ApplicationRecord
       {
         id: asset.id,
         url: asset.public_url,
-        labels: [asset.label.strip],
+        labels: [asset.label],
         filename: "#{Digest::SHA1.hexdigest("#{asset.label}#{asset.id}")}_#{asset.attachment.original_filename}"
       }
     end

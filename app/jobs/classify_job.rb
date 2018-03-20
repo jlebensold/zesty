@@ -39,36 +39,47 @@ class ClassifyJob < ApplicationJob
   def perform(classification_job_id)
     @job_logger.info "Starting Job ##{classification_job_id} on #{Socket.gethostname}"
     @job_id = classification_job_id
-    update_server_status(:started)
+    update_server_status :started
     update_log_on_server
     Dir.mktmpdir do |dir|
-      update_server_status(:preparing)
-      prepare_job_folder(dir)
-      run_crumbs(dir)
-      collect_assets
+      perform_training(dir)
     end
     update_log_on_server
-    update_server_status(:completed)
+    update_server_status :completed
+  end
+
+  def perform_training(dir)
+    update_server_status :preparing
+    prepare_job_folder(dir)
+    run_crumbs(dir)
+    collect_assets
+  end
+
+  def fetch_job_manifest
+    json = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{@job_id}",
+                                       headers: { "X-Api-Key" => api_key })
+    JSON.parse(json.body)
   end
 
   def prepare_job_folder(dir)
     @job_logger.info "Prepare job folder: #{dir} for #{@job_id}"
-    json = RestClient::Request.execute(method: :get, url: "#{url}/input_job_assets/#{@job_id}",
-                                       headers: { "X-Api-Key" => api_key })
-    manifest = JSON.parse(json.body)
+    manifest = fetch_job_manifest
     manifest.each do |input_asset|
       params = input_asset.deep_symbolize_keys
       params[:labels].each do |label|
-        fpath = File.join(dir, label)
-        FileUtils.mkdir_p(fpath)
         @job_logger.info "Fetching: #{params[:id]}"
-        response = RestClient::Request.execute(method: :get, url: params[:url],
-                                               headers: { "X-Api-Key" => api_key })
-        file = File.new("#{fpath}/#{params[:filename]}", "wb")
-        file << response.body
-        file.close
+        fetch_asset(params[:url], params[:filename], File.join(dir, label))
       end
     end
+  end
+
+  def fetch_asset(asset_url, filename, path)
+    response = RestClient::Request.execute(method: :get, url: asset_url,
+                                           headers: { "X-Api-Key" => api_key })
+    FileUtils.mkdir_p(path)
+    file = File.new("#{path}/#{filename}", "wb")
+    file << response.body
+    file.close
   end
 
   def collect_assets
@@ -107,20 +118,26 @@ class ClassifyJob < ApplicationJob
     end
   end
 
+  def cmd_with_args(temp_dir)
+    [File.join(path_to_crumbs, "run.sh"), path_to_crumbs, temp_dir, Rails.env].join(" ")
+  end
+
   def run_crumbs(dir)
     @job_logger.info "Running training (#{path_to_crumbs}) -  #{dir}"
-    cmd_args = [File.join(path_to_crumbs, "run.sh"), path_to_crumbs, dir, Rails.env]
     update_server_status(:training)
-    count = 0
+    line_count = 0
     @job_logger.tagged("Training") do
-      Open3.popen2e(cmd_args.join(" ")) do |_stdin, stdout|
-        stdout.each_line do |line|
-          count += 1
-          @job_logger.info line.delete("\n")
-
-          update_log_on_server if count % 100 == 0
-        end
+      Open3.popen2e(cmd_with_args(dir)) do |_stdin, stdout|
+        line_count += 1
+        process_stdout(stdout, line_count)
       end
+    end
+  end
+
+  def process_stdout(stdout, line_count)
+    stdout.each_line do |line|
+      @job_logger.info line.delete("\n")
+      update_log_on_server if (line_count % 50).zero?
     end
   end
 end

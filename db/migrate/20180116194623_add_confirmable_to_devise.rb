@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/SkipsModelValidations
+
 class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
   # Note: You can't use change, as User.update_all will fail in the down migration
   def up
@@ -20,3 +22,5 @@ class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
     remove_columns :users, :unconfirmed_email # Only if using reconfirmable
   end
 end
+
+# rubocop:enable Rails/SkipsModelValidations

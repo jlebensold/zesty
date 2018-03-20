@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "account/sessions",
                                     registrations: "account/registrations",
@@ -31,3 +33,4 @@ Rails.application.routes.draw do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

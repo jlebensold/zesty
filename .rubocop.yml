@@ -8,6 +8,9 @@ AllCops:
   Exclude:
     - 'Vagrantfile'
     - 'bin/rails'
+    - 'bin/bundle'
+    - 'bin/update'
+    - 'bin/setup'
     - 'bin/yarn'
     - 'bin/rspec'
     - 'bin/spring'
@@ -24,7 +27,7 @@ AllCops:
 # Enable these when we want to start heavy refactoring
 Metrics/LineLength:
   Enabled: true
-  Max: 100
+  Max: 120
 Metrics/MethodLength:
   Enabled: true
 Metrics/ModuleLength:
