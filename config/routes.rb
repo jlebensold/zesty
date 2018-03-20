@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :input_job_assets
     resources :assets
     resources :job_status
+    mount_devise_token_auth_for "User", at: :auth, skip: [:omniauth_callbacks], controllers: {
+      sessions: "api/sessions"
+    }
   end
 
   namespace :account do
