@@ -3,8 +3,6 @@
 module Account
   class OutputAssetsController < BaseController
     def show
-      @asset = OutputAsset.find(params[:id])
-      @url = account_output_asset_download_url(@asset)
     end
 
     def download

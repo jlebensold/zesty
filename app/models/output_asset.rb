@@ -9,6 +9,10 @@ class OutputAsset < ApplicationRecord
 
   delegate :job_id, to: :classification_job, prefix: false
 
+  def public_url
+    StorageManager.new.public_url(self, "output")
+  end
+
   def read_as_text
     StorageManager.new.read_as_text(self)
   end
