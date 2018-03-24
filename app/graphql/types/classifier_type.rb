@@ -1,6 +1,7 @@
 Types::ClassifierType = GraphQL::ObjectType.define do
   name "Classifier"
   field :id, !types.ID
+  field :name, !types.String
   field :url do
     type !types.String
     resolve(lambda do |obj, _args, _ctx|

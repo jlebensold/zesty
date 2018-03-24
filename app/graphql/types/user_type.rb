@@ -2,10 +2,18 @@ Types::UserType = GraphQL::ObjectType.define do
   name "User"
   field :email, !types.String
 
+  field :job do
+    argument :id, !types.ID
+    type Types::ClassificationJobType
+    resolve(lambda do |obj, args, _c|
+      ClassificationJob.find(args[:id])
+    end)
+  end
+
   field :jobs do
     type types[Types::ClassificationJobType]
     resolve(lambda do |obj, args, _c|
-      obj.jobs
+      obj.jobs.order(created_at: :desc)
     end)
   end
 

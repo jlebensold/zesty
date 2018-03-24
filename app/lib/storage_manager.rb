@@ -82,7 +82,8 @@ class StorageManager
     end
 
     def read_as_text(asset)
-      IO.readlines(asset.attachment.path).reverse.join
+      return IO.readlines(asset.attachment.path).reverse.join if File.exists?(asset.attachment.path)
+      ""
     end
   end
 end
