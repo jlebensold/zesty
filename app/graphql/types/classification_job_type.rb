@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Types::ClassificationJobType = GraphQL::ObjectType.define do
   name "ClassificationJob"
   field :id, !types.ID

@@ -2,8 +2,7 @@
 
 module Account
   class OutputAssetsController < BaseController
-    def show
-    end
+    def show; end
 
     def download
       @asset = OutputAsset.find(params[:id])

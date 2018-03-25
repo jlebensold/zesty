@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Types::UserType = GraphQL::ObjectType.define do
   name "User"
   field :email, !types.String
@@ -5,21 +7,21 @@ Types::UserType = GraphQL::ObjectType.define do
   field :job do
     argument :id, !types.ID
     type Types::ClassificationJobType
-    resolve(lambda do |obj, args, _c|
+    resolve(lambda do |_obj, args, _c|
       ClassificationJob.find(args[:id])
     end)
   end
 
   field :jobs do
     type types[Types::ClassificationJobType]
-    resolve(lambda do |obj, args, _c|
+    resolve(lambda do |obj, _args, _c|
       obj.jobs.order(created_at: :desc)
     end)
   end
 
   field :classifiers do
     type types[Types::ClassifierType]
-    resolve(lambda do |obj, args, _c|
+    resolve(lambda do |obj, _args, _c|
       obj.classifiers
     end)
   end

@@ -16,10 +16,9 @@ class User < ApplicationRecord
 
   delegate :name, to: :organization, prefix: true
 
-
   def output_assets
     OutputAsset.joins(classifier: [:organization])
-      .where("classifiers.organization_id = ?", organization_id)
+               .where("classifiers.organization_id = ?", organization_id)
   end
 
   def classifiers

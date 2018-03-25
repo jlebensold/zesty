@@ -12,10 +12,10 @@ class Classifier < ApplicationRecord
   def cleanup_labels
     self.labels = asset_labels.map do |label|
       label.strip
-        .gsub(/\ /,'_')
-        .gsub(/\W/,'')
-        .downcase
-        .truncate(30, omission: "")
+           .tr(" ", "_")
+           .gsub(/\W/, "")
+           .downcase
+           .truncate(30, omission: "")
     end.uniq.compact.join("\r\n")
   end
 

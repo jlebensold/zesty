@@ -1,4 +1,6 @@
 
+# frozen_string_literal: true
+
 class GraphqlController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   skip_before_action :verify_authenticity_token
@@ -9,7 +11,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     result = ZestySchema.execute(query, variables: variables, context: build_context,
-                                          operation_name: operation_name)
+                                        operation_name: operation_name)
     render json: result
   end
 

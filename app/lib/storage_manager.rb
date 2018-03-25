@@ -68,7 +68,7 @@ class StorageManager
     end
 
     def thumbnail_url(asset)
-      asset.attachment.url(:thumb)
+      "#{@api_url}/..#{asset.attachment.url(:thumb)}"
     end
 
     def send_file(asset, controller)
@@ -82,7 +82,7 @@ class StorageManager
     end
 
     def read_as_text(asset)
-      return IO.readlines(asset.attachment.path).reverse.join if File.exists?(asset.attachment.path)
+      return IO.readlines(asset.attachment.path).reverse.join if File.exist?(asset.attachment.path)
       ""
     end
   end

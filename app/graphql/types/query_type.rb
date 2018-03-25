@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Types::QueryType = GraphQL::ObjectType.define do
   name "Query"
   # Add root-level fields here.
@@ -13,7 +15,7 @@ Types::QueryType = GraphQL::ObjectType.define do
 
   field :env, types.String do
     description "env"
-    resolve ->(obj, args, ctx) {
+    resolve ->(_obj, _args, _ctx) {
       Rails.env
     }
   end

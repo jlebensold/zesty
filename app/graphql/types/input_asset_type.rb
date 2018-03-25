@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-Types::OutputAssetType = GraphQL::ObjectType.define do
-  name "OutputAsset"
+Types::InputAssetType = GraphQL::ObjectType.define do
+  name "InputAsset"
   field :id, !types.ID
   field :label, !types.String
   field :attachment_file_name, !types.String
+  field :thumbnail_url do
+    type !types.String
+    resolve(lambda do |obj, _args, _ctx|
+      StorageManager.new.thumbnail_url(obj)
+    end)
+  end
+
   field :url do
     type !types.String
     resolve(lambda do |obj, _args, _ctx|
       obj.public_url
-    end)
-  end
-
-  field :classification_job do
-    type types[Types::ClassificationJobType]
-    resolve(lambda do |obj, _args, _ctx|
-      obj.classification_job
     end)
   end
 
