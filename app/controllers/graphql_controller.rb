@@ -7,14 +7,13 @@ class GraphqlController < ApplicationController
   before_action :authenticate_user!
 
   def execute
-
     if params[:operations].present?
       # used for mapping just a single file:
       operations = ensure_hash(params[:operations])
-      variables = ensure_hash(operations['variables'])
+      variables = ensure_hash(operations["variables"])
       variables["file"] = params["0"]
-      operation_name = operations['operationName']
-      query = operations['query']
+      operation_name = operations["operationName"]
+      query = operations["query"]
     else
       variables = ensure_hash(params[:variables])
       query = params[:query]

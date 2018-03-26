@@ -6,9 +6,7 @@ class Resolvers::CreateInputAsset < GraphQL::Function
   argument :label, !types.String
   argument :file, !::Types::FileType
 
-
   type !types.String
-
 
   def call(_o, args, ctx)
     classifier = Classifier.find_by(
