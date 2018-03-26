@@ -64,6 +64,6 @@ class Classifier < ApplicationRecord
   end
 
   def asset_labels
-    labels.split("\r\n")
+    labels.gsub("\r","").split("\n")
   end
 end

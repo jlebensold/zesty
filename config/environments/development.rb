@@ -12,6 +12,8 @@ Rails.application.configure do
 
   config.cache_classes = false
 
+  config.web_console.whitelisted_ips = '192.168.1.0/16'
+
   # Do not eager load code on boot.
   config.eager_load = false
 

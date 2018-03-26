@@ -10,11 +10,10 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :createClassifier, function: Resolvers::CreateClassifier.new
 
   # Assets
-  # create
-  # destroy
+  field :createInputAsset, function: Resolvers::CreateInputAsset.new
   field :deleteInputAsset, function: Resolvers::DeleteInputAsset.new
 
-  # Jobs
+  # Build
 
   field :runBuild, function: Resolvers::RunBuild.new
 end

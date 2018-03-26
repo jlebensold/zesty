@@ -7,9 +7,19 @@ class GraphqlController < ApplicationController
   before_action :authenticate_user!
 
   def execute
-    variables = ensure_hash(params[:variables])
-    query = params[:query]
-    operation_name = params[:operationName]
+
+    if params[:operations].present?
+      # used for mapping just a single file:
+      operations = ensure_hash(params[:operations])
+      variables = ensure_hash(operations['variables'])
+      variables["file"] = params["0"]
+      operation_name = operations['operationName']
+      query = operations['query']
+    else
+      variables = ensure_hash(params[:variables])
+      query = params[:query]
+      operation_name = params[:operationName]
+    end
     result = ZestySchema.execute(query, variables: variables, context: build_context,
                                         operation_name: operation_name)
     render json: result

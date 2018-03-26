@@ -8,7 +8,17 @@ Types::UserType = GraphQL::ObjectType.define do
     argument :id, !types.ID
     type Types::ClassificationJobType
     resolve(lambda do |_obj, args, _c|
+      # TODO: auth
       ClassificationJob.find(args[:id])
+    end)
+  end
+
+  field :classifier do
+    argument :id, !types.ID
+    type Types::ClassifierType
+    resolve(lambda do |_obj, args, ctx|
+      Classifier.find_by(organization_id: ctx[:current_user].organization_id,
+                         id: args[:id])
     end)
   end
 
