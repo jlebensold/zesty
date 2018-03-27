@@ -9,7 +9,7 @@ module Api
 
     def authenticate
       return unless Rails.env.production?
-      return unless request.headers["X-Api-Key"] == Rails.application.secrets.api_password
+      return if request.headers["X-Api-Key"] == Rails.application.secrets.api_password
       render json: { status: :unauthorized }
     end
   end
